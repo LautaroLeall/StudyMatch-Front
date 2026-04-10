@@ -1,0 +1,113 @@
+.auth-layout-main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-layout-main ::selection {
+    background-color: #bfdbfe;
+}
+
+.auth-bg-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15rem;
+    background: linear-gradient(to bottom, var(--color-primary-hover), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.auth-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 28rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    padding: 2rem;
+    z-index: 10;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .auth-card {
+        padding: 2.5rem;
+    }
+}
+
+.auth-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.auth-logo-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    background: linear-gradient(to bottom right, #1a56db, #3b82f6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -4px rgba(59, 130, 246, 0.3);
+    transition: transform 300ms ease;
+}
+
+.auth-logo-link:hover .auth-logo-icon {
+    transform: scale(1.05);
+}
+
+.auth-logo-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+    margin: 0;
+    transition: color 150ms ease;
+}
+
+.auth-logo-link:hover .auth-logo-title {
+    color: #1a56db;
+}
+
+.auth-logo-lucide {
+    color: white;
+}
+
+.auth-logo-text {
+    text-align: center;
+}
+
+.auth-logo-subtitle {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
