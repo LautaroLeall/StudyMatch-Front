@@ -8,6 +8,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 
 import { registerSchema } from "../../utils/validators";
+import "../../styles/Forms.css";
 
 function RegisterForm() {
     const { register: registerUser } = useAuth();
@@ -25,7 +26,7 @@ function RegisterForm() {
             await registerUser(data);
 
             sileo.success({
-                title: "Cuenta creada correctamente 🚀",
+                title: "Cuenta creada correctamente",
             });
         } catch {
             sileo.error({
@@ -37,7 +38,7 @@ function RegisterForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-5"
+            className="form-container"
         >
             <Input
                 label="Nombre"
