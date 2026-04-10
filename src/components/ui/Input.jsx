@@ -1,3 +1,5 @@
+import '../../styles/Input.css';
+
 function Input({
     label,
     type = "text",
@@ -7,8 +9,8 @@ function Input({
     error,
 }) {
     return (
-        <div className="flex flex-col gap-2 w-full">
-            <label className="text-sm font-medium text-slate-700">
+        <div className="input-wrapper">
+            <label className="input-label">
                 {label}
             </label>
 
@@ -16,25 +18,15 @@ function Input({
                 type={type}
                 placeholder={placeholder}
                 {...(register ? register(name) : {})}
-                className={`
-                    w-full
-                    border
-                    rounded-lg
-                    px-4
-                    py-3
-                    outline-none
-                    transition-all    
-                    ${error
-                        ? "border-red-500"
-                        : "border-slate-300 focus:border-[#1D4BA0]"
-                    }
-                `}
+                className={`input-field ${error ? 'input-field-error' : 'input-field-normal'}`}
             />
 
-            {error && (
-                <span className="text-red-500 text-sm">
+            {error ? (
+                <span className="input-error-text">
                     {error.message}
                 </span>
+            ) : (
+                <span className="input-error-placeholder"></span>
             )}
         </div>
     );
