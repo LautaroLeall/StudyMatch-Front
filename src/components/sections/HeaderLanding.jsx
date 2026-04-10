@@ -2,42 +2,43 @@ import { GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Button from "../ui/Button";
+import '../../styles/HeaderLanding.css';
 
 function HeaderLanding() {
     return (
-        <header className="w-full border-b border-slate-200 bg-white/90 backdrop-blur-sm sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <header className="header-wrapper">
+            <div className="header-container">
 
                 {/* Logo */}
-                <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-[#1D4BA0] flex items-center justify-center">
+                <Link to="/" className="header-logo-group">
+                    <div className="header-logo-icon-bg">
                         <GraduationCap
-                            className="text-white"
+                            className="header-logo-lucide"
                             size={22}
                         />
                     </div>
 
                     <div>
-                        <h1 className="text-xl font-bold text-[#1D4BA0] leading-none">
+                        <h1 className="header-logo-title">
                             StudyMatch
                         </h1>
 
-                        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-slate-500">
+                        <span className="header-logo-subtitle">
                             UNSTA
                         </span>
                     </div>
-                </div>
+                </Link>
 
                 {/* Actions */}
-                <div className="flex items-center gap-3">
+                <div className="header-actions">
                     <Link to="/login">
-                        <button className="text-slate-700 font-medium hover:text-[#1D4BA0] transition">
+                        <button className="header-login-btn">
                             Ingresar
                         </button>
                     </Link>
 
-                    <Link to="/register">
-                        <Button>
+                    <Link to="/register" className="header-register-wrapper">
+                        <Button className="header-register-btn">
                             Registrarse
                         </Button>
                     </Link>
