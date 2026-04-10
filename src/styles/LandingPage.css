@@ -1,0 +1,12 @@
+.landing-page-wrapper {
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.landing-welcome-user {
+    padding: 1rem;
+    text-align: center;
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: 500;
+}
