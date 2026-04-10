@@ -8,6 +8,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 
 import { loginSchema } from "../../utils/validators";
+import "../../styles/Forms.css";
 
 function LoginForm() {
     const { login } = useAuth();
@@ -25,7 +26,7 @@ function LoginForm() {
             await login(data);
 
             sileo.success({
-                title: "Bienvenido nuevamente 👋",
+                title: "Bienvenido nuevamente",
             });
         } catch {
             sileo.error({
@@ -37,7 +38,7 @@ function LoginForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-5"
+            className="form-container"
         >
             <Input
                 label="Correo electrónico"
