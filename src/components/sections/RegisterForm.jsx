@@ -7,29 +7,29 @@ import useAuth from "../../hooks/useAuth";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 
-import { loginSchema } from "../../utils/validators";
+import { registerSchema } from "../../utils/validators";
 
-function LoginForm() {
-    const { login } = useAuth();
+function RegisterForm() {
+    const { register: registerUser } = useAuth();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(loginSchema),
+        resolver: zodResolver(registerSchema),
     });
 
     const onSubmit = async (data) => {
         try {
-            await login(data);
+            await registerUser(data);
 
             sileo.success({
-                title: "Bienvenido nuevamente 👋",
+                title: "Cuenta creada correctamente 🚀",
             });
         } catch {
             sileo.error({
-                title: "Error al iniciar sesión",
+                title: "Error al registrarse",
             });
         }
     };
@@ -40,7 +40,23 @@ function LoginForm() {
             className="flex flex-col gap-5"
         >
             <Input
-                label="Correo electrónico"
+                label="Nombre"
+                placeholder="Tu nombre"
+                name="name"
+                register={register}
+                error={errors.name}
+            />
+
+            <Input
+                label="Apellido"
+                placeholder="Tu apellido"
+                name="lastname"
+                register={register}
+                error={errors.lastname}
+            />
+
+            <Input
+                label="Correo"
                 type="email"
                 placeholder="ejemplo@mail.com"
                 name="email"
@@ -58,10 +74,10 @@ function LoginForm() {
             />
 
             <Button type="submit">
-                Iniciar Sesión
+                Registrarse
             </Button>
         </form>
     );
 }
 
-export default LoginForm;
+export default RegisterForm;
