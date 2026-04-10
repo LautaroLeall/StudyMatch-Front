@@ -1,11 +1,12 @@
 import AuthLayout from "../../layouts/AuthLayout";
 import LoginForm from "../../components/sections/LoginForm";
+import "../../styles/AuthPages.css";
 
 function LoginPage() {
     return (
         <AuthLayout>
-            <h1 className="text-2xl font-bold mb-6 text-center">
-                Bienvenido nuevamente 👋
+            <h1 className="auth-page-title">
+                Bienvenido nuevamente
             </h1>
 
             <LoginForm />

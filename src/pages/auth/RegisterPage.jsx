@@ -1,11 +1,12 @@
 import AuthLayout from "../../layouts/AuthLayout";
 import RegisterForm from "../../components/sections/RegisterForm";
+import "../../styles/AuthPages.css";
 
 function RegisterPage() {
     return (
         <AuthLayout>
-            <h1 className="text-2xl font-bold mb-6 text-center">
-                Crear Cuenta 🚀
+            <h1 className="auth-page-title">
+                Crear Cuenta
             </h1>
 
             <RegisterForm />
