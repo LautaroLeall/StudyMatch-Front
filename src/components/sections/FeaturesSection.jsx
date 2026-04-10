@@ -5,25 +5,26 @@ import {
     BookOpen,
     MessageSquare,
 } from "lucide-react";
+import '../../styles/FeaturesSection.css';
 
 const features = [
     {
         icon: Users,
         title: "Matching Inteligente",
         description:
-            "Conectate con estudiantes de tu misma carrera, año y materias pendientes automáticamente.",
+            "Conectate con estudiantes de tu misma carrera, año y materias pendientes automáticamente. Optimizá tu tiempo encontrando el grupo ideal.",
     },
     {
         icon: BookOpen,
         title: "Grupos de Estudio",
         description:
-            "Creá o unite a grupos organizados para estudiar materias específicas y prepararte mejor.",
+            "Creá o unite a grupos organizados para estudiar materias específicas y prepararte mejor. Colaboración académica al siguiente nivel.",
     },
     {
         icon: MessageSquare,
         title: "Chat Integrado",
         description:
-            "Comunicate en tiempo real con tu grupo para coordinar horarios, resolver dudas y compartir material.",
+            "Comunicate en tiempo real con tu grupo para coordinar horarios, resolver dudas y compartir material en una interfaz limpia y rápida.",
     },
 ];
 
@@ -31,24 +32,29 @@ function FeaturesSection() {
     return (
         <section
             id="features"
-            className="py-24 px-6 bg-slate-50"
+            className="features-section"
         >
-            <div className="max-w-7xl mx-auto">
+            {/* Soft grid background */}
+            <div className="features-bg-grid"></div>
+
+            <div className="features-container">
 
                 {/* Header */}
-                <div className="text-center mb-16">
-                    <h3 className="text-4xl font-bold text-slate-900">
+                <div className="features-header">
+                    <span className="features-badge">
+                        Características
+                    </span>
+                    <h3 className="features-title">
                         ¿Cómo funciona StudyMatch?
                     </h3>
 
-                    <p className="text-slate-600 mt-4 text-lg max-w-2xl mx-auto">
-                        Una plataforma pensada para potenciar el estudio colaborativo
-                        entre estudiantes universitarios.
+                    <p className="features-description">
+                        Una plataforma pensada exclusivamente para potenciar el estudio colaborativo y ayudarte a alcanzar tus metas académicas.
                     </p>
                 </div>
 
                 {/* Cards */}
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="features-grid">
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
 
@@ -57,27 +63,34 @@ function FeaturesSection() {
                                 key={index}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
+                                viewport={{ once: true, margin: "-100px" }}
                                 transition={{
-                                    duration: 0.5,
-                                    delay: index * 0.2,
+                                    duration: 0.6,
+                                    delay: index * 0.15,
+                                    ease: "easeOut"
                                 }}
-                                className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all border"
+                                className="feature-card"
                             >
-                                <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                                    <Icon
-                                        className="text-[#1D4BA0]"
-                                        size={28}
-                                    />
+                                {/* Hover background glow */}
+                                <div className="feature-card-glow"></div>
+
+                                <div className="feature-content">
+                                    <div className="feature-icon-wrapper">
+                                        <Icon
+                                            className="feature-icon"
+                                            size={32}
+                                            strokeWidth={1.5}
+                                        />
+                                    </div>
+
+                                    <h4 className="feature-title">
+                                        {feature.title}
+                                    </h4>
+
+                                    <p className="feature-text">
+                                        {feature.description}
+                                    </p>
                                 </div>
-
-                                <h4 className="text-xl font-bold text-slate-900 mb-4">
-                                    {feature.title}
-                                </h4>
-
-                                <p className="text-slate-600 leading-relaxed">
-                                    {feature.description}
-                                </p>
                             </motion.div>
                         );
                     })}
