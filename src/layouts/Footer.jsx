@@ -1,15 +1,15 @@
 import { GraduationCap } from "lucide-react";
+import '../styles/Footer.css';
 
 function Footer() {
     return (
-        <footer className="border-t border-border py-8 px-6">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex items-center gap-2">
-                    <GraduationCap className="text-primary" size={20} />
-                    <span className="font-bold text-primary text-sm">StudyMatch UNSTA</span>
+        <footer className="footer-wrapper">
+            <div className="footer-container">
+                <div className="footer-logo-group">
+                    <GraduationCap className="footer-icon" size={20} />
+                    <span className="footer-title">StudyMatch UNSTA</span>
                 </div>
-                <p className="text-xs text-muted-foreground">© 2026 StudyMatch — UNSTA, Campus Yerba Buena
-
+                <p className="footer-text">© 2026 StudyMatch — UNSTA, Campus Yerba Buena
                 </p>
             </div>
         </footer>
