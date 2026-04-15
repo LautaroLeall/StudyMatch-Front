@@ -9,10 +9,13 @@ function CTASection() {
                 <div className="footer-cta-icon-wrapper">
                     <GraduationCap className="footer-cta-icon" size={48} />
                 </div>
+
                 <h3 className="footer-cta-title">¿Listo para estudiar mejor?</h3>
+
                 <p className="footer-cta-subtitle">
                     Uníte a la plataforma de matching académico de UNSTA. Sin costo, sin complicaciones.
                 </p>
+
                 <Link to="/register">
                     <button className="footer-cta-btn">
                         Crear mi cuenta gratis
