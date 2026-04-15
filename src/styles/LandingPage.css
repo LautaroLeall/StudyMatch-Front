@@ -1,6 +1,7 @@
 .landing-page-wrapper {
     min-height: 100vh;
     background-color: #ffffff;
+    padding-top: 5rem;
 }
 
 .landing-welcome-user {
