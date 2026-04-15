@@ -9,8 +9,7 @@ import '../../styles/HeroSection.css';
 function HeroSection() {
     return (
         <section className="hero-section">
-            {/* Soft Background Decoration */}
-            <div className="hero-bg-overlay"></div>
+            <div className="hero-bg-overlay" />
 
             <div className="hero-container">
                 {/* Left Content */}
@@ -99,9 +98,9 @@ function HeroSection() {
                             ))}
                         </div>
                     </div>
-                    
+
                     {/* Floating decoration card */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
