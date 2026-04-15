@@ -30,7 +30,7 @@ const steps = [
 
 function HowItWorksSection() {
     return (
-        <section className="how-it-works-section">
+        <section id="how-it-works" className="how-it-works-section">
             {/* Soft grid background */}
             <div className="how-it-works-bg-grid"></div>
 
