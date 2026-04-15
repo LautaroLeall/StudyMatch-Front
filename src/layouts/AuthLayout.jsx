@@ -7,7 +7,8 @@ function AuthLayout({ children }) {
         <main className="auth-layout-main">
 
             {/* Soft grid background */}
-            <div className="auth-bg-grid"></div>
+            <div className="auth-bg-grid-1"></div>
+            <div className="auth-bg-grid-2"></div>
 
             <section className="auth-card">
                 <div className="auth-logo-wrapper">

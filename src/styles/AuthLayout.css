@@ -12,14 +12,23 @@
     background-color: #bfdbfe;
 }
 
-.auth-bg-grid {
+.auth-bg-grid-1 {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 15rem;
-    background: linear-gradient(to bottom, var(--color-primary-hover), transparent);
-    z-index: 1;
+    height: 10rem;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+    pointer-events: none;
+}
+
+.auth-bg-grid-2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10rem;
+    background: linear-gradient(to top, var(--color-primary), transparent);
     pointer-events: none;
 }
 
