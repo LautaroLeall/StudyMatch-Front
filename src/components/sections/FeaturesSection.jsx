@@ -34,12 +34,10 @@ function FeaturesSection() {
             id="features"
             className="features-section"
         >
-            {/* Soft grid background */}
-            <div className="features-bg-grid"></div>
+            <div className="features-bg-grid" />
 
             <div className="features-container">
 
-                {/* Header */}
                 <div className="features-header">
                     <span className="features-badge">
                         Características
@@ -47,13 +45,11 @@ function FeaturesSection() {
                     <h3 className="features-title">
                         ¿Cómo funciona StudyMatch?
                     </h3>
-
                     <p className="features-description">
                         Una plataforma pensada exclusivamente para potenciar el estudio colaborativo y ayudarte a alcanzar tus metas académicas.
                     </p>
                 </div>
 
-                {/* Cards */}
                 <div className="features-grid">
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
@@ -71,7 +67,6 @@ function FeaturesSection() {
                                 }}
                                 className="feature-card"
                             >
-                                {/* Hover background glow */}
                                 <div className="feature-card-glow"></div>
 
                                 <div className="feature-content">
@@ -86,7 +81,6 @@ function FeaturesSection() {
                                     <h4 className="feature-title">
                                         {feature.title}
                                     </h4>
-
                                     <p className="feature-text">
                                         {feature.description}
                                     </p>
