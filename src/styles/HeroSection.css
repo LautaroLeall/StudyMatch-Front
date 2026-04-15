@@ -1,10 +1,17 @@
 .hero-section {
     position: relative;
-    padding-top: 6rem;
-    padding-bottom: 8rem;
+    padding-top: 8rem;
+    padding-bottom: 10rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .hero-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
 }
 
 .hero-bg-overlay {
@@ -12,7 +19,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 15rem;
+    height: 22rem;
     background: linear-gradient(to bottom, var(--color-primary-hover), transparent);
     z-index: 1;
     pointer-events: none;
