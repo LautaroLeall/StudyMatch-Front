@@ -31,8 +31,7 @@ const steps = [
 function HowItWorksSection() {
     return (
         <section id="how-it-works" className="how-it-works-section">
-            {/* Soft grid background */}
-            <div className="how-it-works-bg-grid"></div>
+            <div className="how-it-works-bg-grid" />
 
             <div className="how-it-works-container">
 
