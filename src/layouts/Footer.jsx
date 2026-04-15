@@ -1,3 +1,4 @@
+
 import { GraduationCap } from "lucide-react";
 import '../styles/Footer.css';
 
@@ -5,9 +6,10 @@ function Footer() {
     return (
         <footer className="footer-bottom">
             <div className="footer-bottom-container">
+
                 <div className="footer-bottom-left">
                     <div className="footer-bottom-logo-icon">
-                        < GraduationCap size={16} />
+                        <GraduationCap size={16} />
                     </div>
                     <span className="footer-bottom-brand">StudyMatch UNSTA</span>
                 </div>
