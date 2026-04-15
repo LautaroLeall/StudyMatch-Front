@@ -1,3 +1,4 @@
+// Hook para acceder al usuario autenticado desde el contexto global
 import useAuth from "../../hooks/useAuth";
 
 import HeaderLanding from "../../components/sections/HeaderLanding";
@@ -7,9 +8,13 @@ import FeaturesSection from "../../components/sections/FeaturesSection";
 import CTASection from "../../components/sections/CTASection";
 
 import Footer from "../../layouts/Footer";
+
 import "../../styles/LandingPage.css";
 
 function PageLanding() {
+    // Extrae el objeto 'user' del contexto de autenticación global.
+    // Si el usuario está logueado (user !== null), se muestra un mensaje de bienvenida.
+    // Si no está logueado (user === null), el mensaje no se renderiza (&&  short-circuit).
     const { user } = useAuth();
 
     return (
