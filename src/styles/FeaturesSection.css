@@ -12,10 +12,14 @@
 .features-bg-grid {
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, #1a56db 0.5px, transparent 0.5px), linear-gradient(to bottom, #1a56db 0.5px, transparent 0px);
+    background-image:
+        linear-gradient(to right, rgba(26, 86, 219, 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(26, 86, 219, 0.3) 1px, transparent 1px);
     background-size: 4rem 4rem;
     pointer-events: none;
+    z-index: 0;
 }
+
 
 .features-container {
     max-width: 80rem;
