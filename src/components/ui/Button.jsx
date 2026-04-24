@@ -12,7 +12,7 @@ function Button({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`btn-primary ${className}`}
+            className={`btn-primary flex items-center justify-center gap-2 py-3 px-4 ${className}`}
         >
             {children}
         </button>
