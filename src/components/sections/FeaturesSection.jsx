@@ -32,25 +32,25 @@ function FeaturesSection() {
     return (
         <section
             id="features"
-            className="features-section"
+            className="features-section relative py-25 px-5"
         >
-            <div className="features-bg-grid" />
+            <div className="features-bg-grid absolute" />
 
-            <div className="features-container">
+            <div className="features-container relative mx-auto">
 
-                <div className="features-header">
-                    <span className="features-badge">
+                <div className="features-header text-center mb-15">
+                    <span className="features-badge inline-block mb-4">
                         Características
                     </span>
                     <h3 className="features-title">
                         ¿Cómo funciona StudyMatch?
                     </h3>
-                    <p className="features-description">
+                    <p className="features-description p-3 mt-6 mx-auto">
                         Una plataforma pensada exclusivamente para potenciar el estudio colaborativo y ayudarte a alcanzar tus metas académicas.
                     </p>
                 </div>
 
-                <div className="features-grid">
+                <div className="features-grid grid gap-8 px-3">
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
 
@@ -65,12 +65,11 @@ function FeaturesSection() {
                                     delay: index * 0.15,
                                     ease: "easeOut"
                                 }}
-                                className="feature-card"
+                                className="feature-card relative p-8"
                             >
-                                <div className="feature-card-glow"></div>
 
-                                <div className="feature-content">
-                                    <div className="feature-icon-wrapper">
+                                <div className="feature-content relative">
+                                    <div className="feature-icon-wrapper flex items-center justify-center mb-8">
                                         <Icon
                                             className="feature-icon"
                                             size={32}
@@ -78,10 +77,10 @@ function FeaturesSection() {
                                         />
                                     </div>
 
-                                    <h4 className="feature-title">
+                                    <h4 className="feature-title mt-0 mb-4">
                                         {feature.title}
                                     </h4>
-                                    <p className="feature-text">
+                                    <p className="feature-text m-0">
                                         {feature.description}
                                     </p>
                                 </div>
