@@ -16,10 +16,13 @@
 
     --color-accent: #4f46e5;
 
+    --color-tertiary: #eff6ff;
+    --color-quaternary: #dbeafe;
+
     /* Backgrounds & Text */
     --background: #f8fafc;
     --surface: #ffffff;
-    --text-primary: #0f172a;
+    --text-primary: #1b2b4e;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
 
