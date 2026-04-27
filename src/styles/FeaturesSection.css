@@ -1,59 +1,37 @@
 .features-section {
-    position: relative;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    background-color: #ffffff;
+    background-color: var(--background);
     overflow: hidden;
     border-top: 1px solid var(--color-primary);
 }
 
 .features-bg-grid {
-    position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(to right, rgba(26, 86, 219, 0.3) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(26, 86, 219, 0.3) 1px, transparent 1px);
+        linear-gradient(to right, var(--color-secondary) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-secondary) 1px, transparent 1px);
     background-size: 4rem 4rem;
+    opacity: 0.5;
     pointer-events: none;
     z-index: 0;
 }
 
-
 .features-container {
     max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
     z-index: 10;
 }
 
-.features-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-@media (min-width: 640px) {
-    .features-header {
-        margin-bottom: 6rem;
-    }
-}
-
 .features-badge {
-    display: inline-block;
     color: var(--color-primary);
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
 }
 
 .features-title {
     font-size: 2.25rem;
     font-weight: 800;
-    color: #0f172a;
+    color: var(--text-primary);
     letter-spacing: -0.025em;
     margin: 0;
     line-height: 1.2;
@@ -69,20 +47,9 @@
     color: var(--text-muted);
     background-color: var(--color-primary-hover);
     border-radius: 1.5rem;
-    padding: 0.7rem;
-    margin-top: 1.5rem;
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     max-width: 42rem;
-    margin-left: auto;
-    margin-right: auto;
     line-height: 1.625;
-}
-
-.features-grid {
-    display: grid;
-    gap: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -100,12 +67,10 @@
 
 .feature-card {
     background-color: var(--background);
+    border: 2px dotted var(--color-secondary);
     border-radius: 1.5rem;
-    padding: 2rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-    transition: all 300ms ease;
-    position: relative;
     overflow: hidden;
+    transition: all 300ms ease;
 }
 
 @media (min-width: 640px) {
@@ -115,47 +80,23 @@
 }
 
 .feature-card:hover {
-    border-color: #bfdbfe;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-    transform: translateY(-0.25rem);
-}
-
-.feature-card-glow {
-    position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
-    bottom: -0.5rem;
-    left: -0.5rem;
-    background: linear-gradient(to bottom, rgba(239, 246, 255, 0.5), transparent);
-    opacity: 0;
-    transition: opacity 500ms ease;
-    border-radius: 1.5rem;
-    pointer-events: none;
-}
-
-.feature-card:hover .feature-card-glow {
-    opacity: 1;
+    border-color: var(--color-quaternary);
 }
 
 .feature-content {
-    position: relative;
     z-index: 10;
 }
 
 .feature-icon-wrapper {
     width: 4rem;
     height: 4rem;
-    background-color: #eff6ff;
+    background-color: var(--color-tertiary);
     border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
     transition: background-color 300ms ease;
 }
 
 .feature-card:hover .feature-icon-wrapper {
-    background-color: #dbeafe;
+    background-color: var(--color-quaternary);
 }
 
 .feature-icon {
@@ -165,10 +106,8 @@
 .feature-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 1rem;
+    color: var(--text-primary);
     transition: color 150ms ease;
-    margin-top: 0;
 }
 
 .feature-card:hover .feature-title {
@@ -176,12 +115,11 @@
 }
 
 .feature-text {
-    color: #475569;
+    color: var(--text-secondary);
     line-height: 1.625;
     transition: color 150ms ease;
-    margin: 0;
 }
 
 .feature-card:hover .feature-text {
-    color: #334155;
+    color: var(--text-primary);
 }
