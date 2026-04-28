@@ -30,10 +30,11 @@ const steps = [
 
 function HowItWorksSection() {
     return (
-        <section id="how-it-works" className="how-it-works-section">
-            <div className="how-it-works-bg-grid" />
+        <section id="how-it-works"
+            className="how-it-works-section relative py-25 px-5">
+            <div className="how-it-works-bg-grid absolute" />
 
-            <div className="how-it-works-container">
+            <div className="how-it-works-container relative grid items-center gap-15 mx-auto">
 
                 {/* Left Column Content */}
                 <motion.div
@@ -42,19 +43,21 @@ function HowItWorksSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <div className="how-header">
-                        <span className="how-badge">
+                    <div className="how-header mb-4">
+                        <span className="how-badge inline-block mb-1">
                             Como funciona
                         </span>
-                        <h2 className="how-title">Empezá en minutos</h2>
-                        <p className="how-description">
+                        <h2 className="how-title">
+                            Empezá en minutos
+                        </h2>
+                        <p className="how-description text-start p-4 mt-5 mx-auto">
                             Sin complicaciones.
                             <br />
                             Te guiamos paso a paso para armar tu perfil académico completo.
                         </p>
                     </div>
 
-                    <div className="how-steps">
+                    <div className="how-steps flex flex-col gap-3 mb-6">
                         {steps.map((step) => (
                             <motion.div
                                 key={step.number}
@@ -62,20 +65,26 @@ function HowItWorksSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: step.number * 0.1 }}
-                                className="how-step-item"
+                                className="how-step-item flex items-start gap-4 p-4"
                             >
-                                <div className="how-step-number">{step.number}</div>
-                                <div className="how-step-content">
-                                    <h4 className="how-step-title">{step.title}</h4>
-                                    <p className="how-step-text">{step.text}</p>
+                                <div className="how-step-number flex items-center justify-center">
+                                    {step.number}
+                                </div>
+                                <div className="how-step-content flex flex-col">
+                                    <h4 className="how-step-title m-0 mb-1">
+                                        {step.title}
+                                    </h4>
+                                    <p className="how-step-text m-0">
+                                        {step.text}
+                                    </p>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    <div className="how-action">
+                    <div className="how-action inline-flex">
                         <Link to="/register">
-                            <Button className="hero-btn-primary">
+                            <Button className="hero-btn-primary flex items-center justify-center gap-2 py-4 px-8">
                                 Comenzar ahora
                                 <ArrowRight className="hero-btn-icon" />
                             </Button>
@@ -89,48 +98,66 @@ function HowItWorksSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="how-visual"
+                    className="how-visual relative"
                 >
-                    <div className="dashboard-preview">
-                        <div className="dashboard-header">Vista del Dashboard</div>
+                    <div className="dashboard-preview p-9">
+                        <div className="dashboard-header mb-5">
+                            Vista del Dashboard
+                        </div>
 
-                        <div className="dashboard-list">
-                            <div className="dashboard-row">
-                                <span className="dashboard-row-title">Programación I</span>
-                                <div className="dashboard-status">
-                                    <span className="status-dot dot-warning"></span>
+                        <div className="dashboard-list flex flex-col gap-4 mb-8">
+                            <div className="dashboard-row flex items-center justify-between p-4">
+                                <span className="dashboard-row-title">
+                                    Programación I
+                                </span>
+                                <div className="dashboard-status flex items-center gap-1">
+                                    <span className="status-dot dot-warning" />
                                     Cursando
                                 </div>
                             </div>
-                            <div className="dashboard-row">
-                                <span className="dashboard-row-title">Base de Datos I</span>
-                                <div className="dashboard-status">
-                                    <span className="status-dot dot-danger"></span>
+                            <div className="dashboard-row flex items-center justify-between p-4">
+                                <span className="dashboard-row-title">
+                                    Base de Datos I
+                                </span>
+                                <div className="dashboard-status flex items-center gap-1">
+                                    <span className="status-dot dot-danger" />
                                     Debe rendir
                                 </div>
                             </div>
-                            <div className="dashboard-row">
-                                <span className="dashboard-row-title">Matemática I</span>
-                                <div className="dashboard-status">
-                                    <span className="status-dot dot-success"></span>
+                            <div className="dashboard-row flex items-center justify-between p-4">
+                                <span className="dashboard-row-title">
+                                    Matemática I
+                                </span>
+                                <div className="dashboard-status flex items-center gap-1">
+                                    <span className="status-dot dot-success" />
                                     Aprobada
                                 </div>
                             </div>
-                            <div className="dashboard-row">
-                                <span className="dashboard-row-title">Sistemas Operativos</span>
-                                <div className="dashboard-status">
-                                    <span className="status-dot dot-muted"></span>
+                            <div className="dashboard-row flex items-center justify-between p-4">
+                                <span className="dashboard-row-title">
+                                    Sistemas Operativos
+                                </span>
+                                <div className="dashboard-status flex items-center gap-1">
+                                    <span className="status-dot dot-muted" />
                                     No cursada
                                 </div>
                             </div>
                         </div>
 
-                        <div className="suggestion-header">Grupos sugeridos para vos</div>
-                        <div className="suggestion-card">
-                            <div className="suggestion-icon">P1</div>
-                            <div className="suggestion-info">
-                                <span className="suggestion-title">Final Prog I — Jueves 18hs</span>
-                                <span className="suggestion-meta">4 integrantes · Virtual</span>
+                        <div className="suggestion-header mb-4">
+                            Grupos sugeridos para vos
+                        </div>
+                        <div className="suggestion-card flex items-center gap-5 p-5">
+                            <div className="suggestion-icon flex items-center justify-center">
+                                P1
+                            </div>
+                            <div className="suggestion-info flex flex-col">
+                                <span className="suggestion-title">
+                                    Final Prog I — Jueves 18hs
+                                </span>
+                                <span className="suggestion-meta">
+                                    4 integrantes · Virtual
+                                </span>
                             </div>
                         </div>
                     </div>
