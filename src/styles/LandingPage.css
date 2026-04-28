@@ -1,13 +1,12 @@
 .landing-page-wrapper {
     min-height: 100vh;
-    background-color: #ffffff;
+    background-color: var(--background);
+    /* ELIMINAR CUANDO SE CONECTE CON BACKEND */
     padding-top: 5rem;
 }
 
 .landing-welcome-user {
-    padding: 1rem;
-    text-align: center;
-    background-color: #f1f5f9;
-    color: #475569;
-    font-weight: 500;
+    background-color: var(--color-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
 }
