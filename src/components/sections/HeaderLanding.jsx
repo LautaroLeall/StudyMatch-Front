@@ -80,41 +80,49 @@ function HeaderLanding() {
     };
 
     return (
-        <header className={`header-wrapper ${isScrolled ? 'scrolled' : ''}`}>
+        <header className={`header-wrapper fixed py-5 px-0 ${isScrolled ? 'scrolled' : ''}`}>
 
-            <div className="header-container">
-                <a href="/" className="header-logo-group" onClick={handleLogoClick}>
-                    <div className="header-logo-icon-bg">
+            <div className="header-container relative flex items-center justify-between my-0 py-0 mx-auto px-8">
+                <a href="/" className="header-logo-group flex items-center gap-3" onClick={handleLogoClick}>
+                    <div className="header-logo-icon-bg flex items-center justify-center">
                         <GraduationCap className="header-logo-lucide" size={22} />
                     </div>
                     <div>
-                        <h1 className="header-logo-title">StudyMatch</h1>
-                        <span className="header-logo-subtitle">UNSTA</span>
+                        <h1 className="header-logo-title m-0">
+                            StudyMatch
+                        </h1>
+                        <span className="header-logo-subtitle block mt-0.5">
+                            UNSTA
+                        </span>
                     </div>
                 </a>
 
-                {/* Navegación desktop - Solo visible en pantallas >= 1024px (lg) */}
-                <nav className="header-nav">
+                {/* Navegación desktop >= 1024px (lg) */}
+                <nav className="header-nav absolute items-center py-2 px-8 gap-12">
                     {navLinks.map((link) => (
-                        <a key={link.name} href={link.href} className="header-nav-link">
+                        <a key={link.name} href={link.href} className="header-nav-link relative py-1 px-0">
                             {link.name}
                         </a>
                     ))}
                 </nav>
 
-                {/* Botones de acción desktop - Solo visibles en pantallas >= 1024px */}
-                <div className="header-actions">
+                {/* Botones de acción desktop >= 1024px */}
+                <div className="header-actions items-center gap-6">
                     <Link to="/login">
-                        <button className="header-login-btn">Ingresar</button>
+                        <button className="header-login-btn py-3 px-7">
+                            Ingresar
+                        </button>
                     </Link>
                     <Link to="/register" className="header-register-wrapper">
-                        <Button className="header-register-btn">Registrarse</Button>
+                        <Button className="header-register-btn py-3 px-7">
+                            Registrarse
+                        </Button>
                     </Link>
                 </div>
 
-                {/* Botón hamburguesa móvil - Solo visible en pantallas < 1024px */}
+                {/* Botón hamburguesa móvil < 1024px */}
                 <button
-                    className="header-mobile-toggle"
+                    className="header-mobile-toggle items-center justify-center"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle Menu"
                 >
@@ -130,14 +138,14 @@ function HeaderLanding() {
                         initial="hidden"
                         animate="visible"
                         exit="exit"
-                        className="header-mobile-menu"
+                        className="header-mobile-menu fixed py-8 px-5"
                     >
-                        <nav className="header-mobile-nav">
+                        <nav className="header-mobile-nav flex flex-col items-center text-center gap-2">
                             {navLinks.map((link) => (
                                 <motion.div key={link.name} variants={itemVariants}>
                                     <a
                                         href={link.href}
-                                        className="header-mobile-link"
+                                        className="header-mobile-link block py-2 px-5"
                                         onClick={(e) => handleNavItemClick(e, link.href)}
                                     >
                                         {link.name}
@@ -145,12 +153,16 @@ function HeaderLanding() {
                                 </motion.div>
                             ))}
 
-                            <motion.div variants={itemVariants} className="header-mobile-actions">
-                                <Link to="/login" onClick={handleNavItemClick} className="header-mobile-action-link">
-                                    Ingresar
+                            <motion.div variants={itemVariants} className="header-mobile-actions flex flex-col items-center gap-5 mt-5 pt-5">
+                                <Link to="/login" className="w-full">
+                                    <button className="header-mobile-action-link py-3 px-7 w-full">
+                                        Ingresar
+                                    </button>
                                 </Link>
-                                <Link to="/register" onClick={handleNavItemClick} className="w-full">
-                                    <Button className="w-full">Registrarse</Button>
+                                <Link to="/register" className="w-full">
+                                    <Button className="header-register-btn py-3 px-7 w-full">
+                                        Registrarse
+                                    </Button>
                                 </Link>
                             </motion.div>
                         </nav>
