@@ -10,6 +10,7 @@
     /* Primary colors */
     --color-primary: #1a56db;
     --color-primary-hover: #1e429f;
+    --color-primary-transparent: #1e429fb3;
 
     --color-secondary: #3b82f6;
     --color-secondary-hover: #2563eb;
