@@ -19,8 +19,9 @@ function PageLanding() {
 
     return (
         <div className="landing-page-wrapper">
+            {/* ELIMINAR CUANDO SE CONECTE CON BACKEND */}
             {user && (
-                <p className="landing-welcome-user">
+                <p className="landing-welcome-user text-center pt-8 pb-3 m-0">
                     Bienvenido {user.name}
                 </p>
             )}
