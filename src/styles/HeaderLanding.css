@@ -76,7 +76,7 @@
 
 .header-nav-link {
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--color-tertiary);
     font-size: 0.9rem;
     font-weight: 600;
     transition: all 250ms ease;
@@ -84,7 +84,7 @@
 }
 
 .header-nav-link:hover {
-    color: var(--background);
+    color: var(--surface);
 }
 
 .header-nav-link::after {
@@ -94,7 +94,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--background);
+    background: var(--surface);
     transition: all 300ms ease;
     transform: translateX(-50%);
     border-radius: 2px;
