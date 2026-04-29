@@ -1,16 +1,6 @@
-/* ==============================================
-   REGISTER PAGE — Light Theme (matches Landing)
-   ============================================== */
-
-/* ── LAYOUT ── */
 .reg-layout {
     min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
     background: var(--background);
-    padding: 2.5rem 1rem 4rem;
-    position: relative;
     overflow: hidden;
 }
 
@@ -19,26 +9,26 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-    background-size: 3rem 3rem;
+        linear-gradient(to right, var(--color-secondary) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-secondary) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    opacity: 0.1;
     pointer-events: none;
 }
 
 .reg-layout::after {
     content: '';
     position: absolute;
-    top: -18rem;
+    top: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 48rem;
-    height: 48rem;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 68%);
+    width: 65rem;
+    height: 55rem;
+    background: radial-gradient(circle, var(--color-secondary) 0%, transparent 50%);
     pointer-events: none;
 }
 
 .reg-container {
-    position: relative;
     z-index: 1;
     width: 100%;
     max-width: 560px;
@@ -49,13 +39,8 @@
     max-width: 720px;
 }
 
-/* ── LOGO ── */
+/* LOGO */
 .reg-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2.25rem;
     text-decoration: none;
 }
 
@@ -63,56 +48,33 @@
     width: 2.75rem;
     height: 2.75rem;
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    border-radius: 0.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 28px rgba(59, 130, 246, 0.3);
+    border-radius: 0.85rem;
     flex-shrink: 0;
 }
 
 .reg-logo-icon svg {
-    color: #fff;
-}
-
-.reg-logo-text {
-    display: flex;
-    flex-direction: column;
+    color: var(--background);
 }
 
 .reg-logo-title {
     font-family: var(--font-heading);
+    color: var(--text-primary);
     font-size: 1.25rem;
     font-weight: 800;
-    color: var(--text-primary);
+    letter-spacing: -0.025em;
     line-height: 1;
-    margin: 0;
 }
 
 .reg-logo-subtitle {
     font-family: var(--font-heading);
+    color: var(--color-secondary);
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-secondary);
 }
 
-/* ── PROGRESS BAR ── */
-.reg-progress {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.reg-step-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-}
-
+/* PROGRESS BAR */
 .reg-step-dot {
     width: 2.5rem;
     height: 2.5rem;
@@ -296,7 +258,8 @@
 }
 
 .reg-input::placeholder {
-    color: transparent; /* For floating label */
+    color: transparent;
+    /* For floating label */
 }
 
 /* Label styling for floating effect */
@@ -316,8 +279,8 @@
 }
 
 /* Floating Label Animation */
-.reg-input:focus + .reg-label,
-.reg-input:not(:placeholder-shown) + .reg-label {
+.reg-input:focus+.reg-label,
+.reg-input:not(:placeholder-shown)+.reg-label {
     top: 0.65rem;
     font-size: 0.65rem;
     font-weight: 700;
@@ -604,7 +567,7 @@
 
 .reg-materia-row:hover:not(.locked) {
     border-color: #cbd5e1;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .reg-materia-row.locked {
