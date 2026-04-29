@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMatch — Documentación Sprint 1</title>
+    <style>
+        /* ========== FUENTES ========== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --accent: #3b82f6;
+            --bg: #ffffff;
+            --bg-soft: #f8fafc;
+            --bg-dark: #0f172a;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        html { font-size: 15px; }
+
+        body {
+            font-family: var(--font);
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--bg);
+        }
+
+        /* ========== PAGE BREAKS ========== */
+        @media print {
+            body { font-size: 13px; }
+            .page-break { page-break-before: always; }
+            .no-break { page-break-inside: avoid; }
+            header, .cover { page-break-after: always; }
+            h2.section-title { page-break-before: always; }
+        }
+
+        /* ========== COVER PAGE ========== */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e3a8a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(59,130,246,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(59,130,246,0.07) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+        }
+
+        .cover-content { position: relative; z-index: 1; max-width: 640px; }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59,130,246,0.15);
+            border: 1px solid rgba(59,130,246,0.3);
+            color: #93c5fd;
+            padding: 0.4rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .cover-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.5rem;
+            box-shadow: 0 20px 60px rgba(59,130,246,0.4);
+        }
+
+        .cover-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+        }
+
+        .cover-title span {
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cover-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cover-meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .cover-meta-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .cover-meta-value {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        .cover-divider {
+            width: 60px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            margin: 2.5rem auto;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .document {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* ========== SECTION HEADERS ========== */
+        h2.section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        h2.section-title:first-of-type { margin-top: 0; }
+
+        .section-intro {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 680px;
+            line-height: 1.8;
+        }
+
+        h3.subsection {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 2.5rem 0 1rem;
+        }
+
+        p { margin-bottom: 1rem; color: var(--text); }
+
+        /* ========== CARDS ========== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        .card {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .card-icon.blue   { background: #dbeafe; }
+        .card-icon.purple { background: #ede9fe; }
+        .card-icon.green  { background: #d1fae5; }
+        .card-icon.orange { background: #fed7aa; }
+        .card-icon.pink   { background: #fce7f3; }
+        .card-icon.teal   { background: #ccfbf1; }
+
+        .card-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card-version {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--mono);
+            background: var(--border);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.15rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ========== TECH TABLE ========== */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .tech-table th {
+            background: var(--bg-dark);
+            color: white;
+            padding: 0.85rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .tech-table th:first-child { border-radius: 8px 0 0 8px; }
+        .tech-table th:last-child  { border-radius: 0 8px 8px 0; }
+
+        .tech-table td {
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .tech-table tr:last-child td { border-bottom: none; }
+        .tech-table tr:hover td { background: var(--bg-soft); }
+
+        .badge-dep {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .badge-dev {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline {
+            position: relative;
+            margin: 2rem 0 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-dot {
+            flex-shrink: 0;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            z-index: 1;
+            box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px #dbeafe;
+        }
+
+        .timeline-content { padding-top: 0.5rem; }
+
+        .timeline-content h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: var(--text);
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ========== CODE BLOCKS ========== */
+        .code-block {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: var(--mono);
+            font-size: 0.83rem;
+            line-height: 1.75;
+            margin: 1rem 0 1.75rem;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+        }
+
+        .code-block .comment  { color: #475569; }
+        .code-block .keyword  { color: #c084fc; }
+        .code-block .string   { color: #86efac; }
+        .code-block .tag      { color: #7dd3fc; }
+        .code-block .value    { color: #fbbf24; }
+
+        /* ========== COMPONENT BREAKDOWN ========== */
+        .component-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        .component-item {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .component-item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-item-name {
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .component-item-type {
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 0.15rem 0.5rem;
+            border-radius: 100px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .component-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .component-item ul {
+            list-style: none;
+            margin: 0.5rem 0 0;
+        }
+
+        .component-item ul li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 0.1rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .component-item ul li::before {
+            content: '→';
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* ========== CALLOUTS ========== */
+        .callout {
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .callout.info    { background: #eff6ff; border-left: 4px solid #3b82f6; }
+        .callout.success { background: #f0fdf4; border-left: 4px solid #10b981; }
+        .callout.warning { background: #fffbeb; border-left: 4px solid #f59e0b; }
+
+        .callout-icon { font-size: 1.25rem; flex-shrink: 0; }
+        .callout-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .callout-body p  { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+
+        /* ========== ARCHITECTURE DIAGRAM ========== */
+        .arch-diagram {
+            background: var(--bg-dark);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 1.5rem 0 2.5rem;
+            font-family: var(--mono);
+        }
+
+        .arch-level {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .arch-node {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #e2e8f0;
+            font-size: 0.82rem;
+            text-align: center;
+        }
+
+        .arch-node.primary { background: rgba(37,99,235,0.3); border-color: rgba(59,130,246,0.4); color: #93c5fd; }
+        .arch-node.green   { background: rgba(16,185,129,0.2); border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
+
+        .arch-arrow {
+            text-align: center;
+            color: rgba(255,255,255,0.2);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-label {
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ========== PRINCIPLES ========== */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        .principle-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .principle-item h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .principle-item p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ========== TABLE OF CONTENTS ========== */
+        .toc {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .toc h3 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .toc-list { list-style: none; }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.95rem;
+        }
+
+        .toc-item:last-child { border-bottom: none; }
+
+        .toc-item-name {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .toc-num {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ========== CSS ARCHITECTURE SECTION ========== */
+        .css-rule-block {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: #7dd3fc;
+        }
+
+        .css-rule-block .prop { color: #c084fc; }
+        .css-rule-block .val  { color: #86efac; }
+
+        /* ========== STATUS TAGS ========== */
+        .status-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .status-done    { background: #d1fae5; color: #065f46; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+
+        /* ========== FOOTER ========== */
+        .doc-footer {
+            margin-top: 5rem;
+            padding: 2rem;
+            border-top: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ========== PRINT ========== */
+        @media print {
+            .cover { break-after: page; }
+            h2.section-title { break-before: page; }
+            .no-break { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== PORTADA ===================== -->
+<div class="cover">
+    <div class="cover-content">
+        <span class="cover-badge">📋 Documentación Técnica</span>
+
+        <div class="cover-logo">🎓</div>
+
+        <h1 class="cover-title">Study<span>Match</span></h1>
+        <p class="cover-subtitle">Plataforma de Matching Académico · UNSTA</p>
+
+        <div class="cover-divider"></div>
+
+        <h2 style="color:white; font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">Sprint 1 — Landing Page</h2>
+        <p style="color:rgba(255,255,255,0.5); font-size:0.95rem;">Documentación completa de tecnologías, dependencias, arquitectura y decisiones de diseño</p>
+
+        <div class="cover-divider"></div>
+
+        <div class="cover-meta">
+            <div class="cover-meta-item">
+                <span class="cover-meta-label">Proyecto</span>
+                <span class="cover-meta-value">Proyecto Final</span>
+            </div>
+            <div class="cover-meta-item">
+                <span class="cover-meta-label">Sprint</span>
+                <span class="cover-meta-value">01</span>
+            </div>
+            <div class="cover-meta-item">
+                <span class="cover-meta-label">Año</span>
+                <span class="cover-meta-value">2026</span>
+            </div>
+            <div class="cover-meta-item">
+                <span class="cover-meta-label">Framework</span>
+                <span class="cover-meta-value">React + Vite</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== DOCUMENTO PRINCIPAL ===================== -->
+<div class="document">
+
+    <!-- ÍNDICE -->
+    <div class="toc">
+        <h3>Índice de Contenidos</h3>
+        <ul class="toc-list">
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">1</span> Resumen Ejecutivo del Sprint 1</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">2</span> Stack Tecnológico Principal</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">3</span> Dependencias y Para Qué Sirve Cada Una</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">4</span> Arquitectura del Proyecto</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">5</span> Sistema de Diseño (CSS-First)</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">6</span> Componentes Desarrollados</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">7</span> Línea de Tiempo del Sprint</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">8</span> Principios y Decisiones de Diseño</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">9</span> Responsividad y Accesibilidad</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">10</span> Próximos Pasos (Sprint 2)</span>
+            </li>
+            <li class="toc-item">
+                <span class="toc-item-name"><span class="toc-num">11</span> Arquitectura Interna: Context, Hooks, Services y Utils</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- ===== SECCIÓN 1: RESUMEN EJECUTIVO ===== -->
+    <h2 class="section-title">1. Resumen Ejecutivo del Sprint 1</h2>
+    <p class="section-intro">
+        El Sprint 1 tuvo como objetivo construir la <strong>Landing Page pública de StudyMatch</strong>: la primera pantalla que ve cualquier visitante del sitio. El foco estuvo en tres pilares: <em>estética de alta calidad</em>, <em>arquitectura de código limpia y escalable</em>, y <em>experiencia de usuario fluida en todos los dispositivos</em>.
+    </p>
+
+    <div class="card-grid no-break">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon blue">🎯</div>
+                <div>
+                    <div class="card-name">Objetivo</div>
+                </div>
+            </div>
+            <p>Construir la Landing Page completa, funcional y visualmente premium de la plataforma StudyMatch UNSTA.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon green">✅</div>
+                <div>
+                    <div class="card-name">Estado Final</div>
+                </div>
+            </div>
+            <p>Landing Page completa con 6 secciones, animaciones, responsive design y navegación por anclas funcional.</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon purple">🏗️</div>
+                <div>
+                    <div class="card-name">Enfoque</div>
+                </div>
+            </div>
+            <p>CSS-First: estilos en archivos dedicados. Prohibido el uso de <code>@apply</code> de Tailwind y emojis en el código.</p>
+        </div>
+    </div>
+
+    <h3 class="subsection">¿Qué se construyó?</h3>
+    <p>Se desarrollaron <strong>6 secciones completas</strong> de la Landing Page, cada una como un componente de React independiente con su propio archivo de estilos CSS:</p>
+
+    <div class="component-list">
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">HeaderLanding.jsx</span>
+                <span class="component-item-type">Navegación</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Header fijo con efecto glassmorphism al hacer scroll</li>
+                <li>Links de navegación interna centrados con smooth scroll</li>
+                <li>Menú hamburguesa animado para mobile con animaciones escalonadas (stagger)</li>
+                <li>Logo con scroll-to-top al hacer clic</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">HeroSection.jsx</span>
+                <span class="component-item-type">Sección</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Primera impresión del sitio con mensaje de valor claro</li>
+                <li>Grid de 2 columnas: texto + mockup visual de la app</li>
+                <li>Animaciones de entrada coordinadas con Framer Motion</li>
+                <li>Tarjeta flotante decorativa de notificación</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">FeaturesSection.jsx</span>
+                <span class="component-item-type">Sección</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Grid de 3 tarjetas de características con animación whileInView</li>
+                <li>Fondo oscuro con cuadrícula decorativa (CSS gradient grid)</li>
+                <li>Efecto de "glow" azul en hover por tarjeta</li>
+                <li>Animaciones escalonadas (cada tarjeta entra con 150ms de delay adicional)</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">HowItWorksSection.jsx</span>
+                <span class="component-item-type">Sección</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Layout de 2 columnas: pasos numerados + mockup del Dashboard</li>
+                <li>4 pasos del proceso de onboarding animados individualmente</li>
+                <li>Vista previa estática del Dashboard como elemento decorativo</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">CTASection.jsx</span>
+                <span class="component-item-type">Conversión</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Sección de conversión final con gradiente azul vibrante</li>
+                <li>Botón de registro destacado con ícono de flecha</li>
+                <li>Separado del Footer para reutilización independiente</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">Footer.jsx</span>
+                <span class="component-item-type">Layout</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Barra institucional con logo, nombre de la universidad y año</li>
+                <li>3 columnas responsivas (en mobile: columna única)</li>
+                <li>Alojado en /layouts/ por ser potencialmente reutilizable en otras páginas</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">LoginPage.jsx</span>
+                <span class="component-item-type">Página</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Diseño Premium Light Theme alineado con la landing</li>
+                <li>Inputs modernos con animación de etiqueta flotante (Floating Labels)</li>
+                <li>Validación en tiempo real con Zod y react-hook-form</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">RegisterPage.jsx</span>
+                <span class="component-item-type">Página</span>
+                <span class="status-tag status-done">✓ Completo</span>
+            </div>
+            <ul>
+                <li>Wizard de 4 pasos para registro de estudiantes</li>
+                <li>Inputs Premium Light Theme idénticos a los del Login</li>
+                <li>Integración con Sileo para notificaciones de éxito y error</li>
+                <li>Uso de iconos Lucide React en lugar de emojis en los objetivos</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 2: STACK TECNOLÓGICO ===== -->
+    <h2 class="section-title">2. Stack Tecnológico Principal</h2>
+    <p class="section-intro">
+        El stack fue elegido para maximizar la velocidad de desarrollo, la calidad del resultado visual y la escalabilidad del proyecto hacia las siguientes páginas de la aplicación.
+    </p>
+
+    <div class="card-grid">
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon blue">⚛️</div>
+                <div>
+                    <div class="card-name">React 19</div>
+                    <div class="card-version">v19.2.4</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> Es la librería de UI más adoptada del mercado. Permite construir interfaces como una colección de componentes reutilizables. Su sistema de estados (useState), efectos (useEffect) y Context API son ideales para una SPA como StudyMatch.</p>
+        </div>
+
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon purple">⚡</div>
+                <div>
+                    <div class="card-name">Vite 8</div>
+                    <div class="card-version">v8.0.4</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> Servidor de desarrollo ultra-rápido con Hot Module Replacement (HMR). Los cambios en el código se reflejan en el navegador en millisegundos sin recargar toda la página. Reemplaza a CRA (Create React App) que está deprecado.</p>
+        </div>
+
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon green">🎨</div>
+                <div>
+                    <div class="card-name">Vanilla CSS</div>
+                    <div class="card-version">CSS3 + Custom Props</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> Máximo control y flexibilidad. Se eligió un enfoque CSS-First sin dependencia de utilidades de Tailwind (<code>@apply</code>), con variables CSS globales para el sistema de diseño y archivos <code>.css</code> por componente.</p>
+        </div>
+
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon orange">🔀</div>
+                <div>
+                    <div class="card-name">React Router DOM 7</div>
+                    <div class="card-version">v7.14.0</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> Sistema de enrutado del lado del cliente (SPA). Permite navegar entre <code>/</code>, <code>/login</code>, <code>/register</code> y <code>/dashboard</code> sin recargar la página completa, manteniendo el estado de la app.</p>
+        </div>
+
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon teal">🎬</div>
+                <div>
+                    <div class="card-name">Framer Motion 12</div>
+                    <div class="card-version">v12.38.0</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> La librería de animaciones más potente del ecosistema React. Permite animar elementos al entrar en el viewport (<code>whileInView</code>), al hacer hover (<code>whileHover</code>) y manejar animaciones de salida complejas con <code>AnimatePresence</code>.</p>
+        </div>
+
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon pink">🔷</div>
+                <div>
+                    <div class="card-name">Lucide React</div>
+                    <div class="card-version">v1.3.0</div>
+                </div>
+            </div>
+            <p><strong>¿Por qué?</strong> Librería de íconos SVG diseñada específicamente para React. Reemplaza el uso de emojis en la interfaz con íconos limpios, escalables y estilizables. Cada ícono es un componente que acepta props como <code>size</code> y <code>strokeWidth</code>.</p>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 3: DEPENDENCIAS ===== -->
+    <h2 class="section-title">3. Dependencias — Para Qué Sirve Cada Una</h2>
+    <p class="section-intro">
+        El archivo <code>package.json</code> define todas las dependencias del proyecto. Se dividen en dos grupos: <strong>dependencies</strong> (se usan en producción, se incluyen en el bundle final) y <strong>devDependencies</strong> (solo se usan durante el desarrollo).
+    </p>
+
+    <h3 class="subsection">Dependencies (Producción)</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Paquete</th>
+                <th>Versión</th>
+                <th>¿Para qué sirve?</th>
+                <th>¿Dónde se usa?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-dep">react</span></td>
+                <td>19.2.4</td>
+                <td>Núcleo de la librería. Permite crear componentes, manejar estados con <strong>useState</strong>, efectos secundarios con <strong>useEffect</strong> y contexto global con <strong>Context API</strong>.</td>
+                <td>Todo el proyecto. Cada componente <code>.jsx</code> es React.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">react-dom</span></td>
+                <td>19.2.4</td>
+                <td>Se encarga de <strong>renderizar</strong> los componentes de React en el DOM del navegador. También gestiona el rendimiento con Virtual DOM (compara cambios y actualiza solo lo necesario).</td>
+                <td><code>main.jsx</code>: punto de entrada de la app.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">react-router-dom</span></td>
+                <td>7.14.0</td>
+                <td>Sistema de <strong>enrutado del lado del cliente</strong> (SPA). Provee <code>&lt;BrowserRouter&gt;</code>, <code>&lt;Route&gt;</code>, <code>&lt;Link&gt;</code> y el hook <code>useNavigate</code> para navegar entre páginas sin recargar.</td>
+                <td>Toda la navegación: Header, Hero, CTA (botones "Registrarse", "Ingresar").</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">framer-motion</span></td>
+                <td>12.38.0</td>
+                <td>Librería de <strong>animaciones declarativas</strong>. Permite animar elementos al entrar/salir del DOM, al hacer scroll, al hacer hover, y orquestar secuencias complejas con <code>variants</code> y <code>AnimatePresence</code>.</td>
+                <td>HeroSection, FeaturesSection, HowItWorksSection, HeaderLanding (menú mobile).</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">lucide-react</span></td>
+                <td>1.3.0</td>
+                <td>Librería de <strong>íconos SVG</strong> como componentes de React. Reemplaza los emojis con íconos limpios, escalables y totalmente personalizables mediante CSS.</td>
+                <td>Todos los componentes: GraduationCap, Menu, X, ArrowRight, BookOpen, Users, Rocket, MessageSquare, etc.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">axios</span></td>
+                <td>1.15.0</td>
+                <td>Cliente HTTP para hacer <strong>peticiones a la API</strong> del backend (GET, POST, PUT, DELETE). Maneja automáticamente la serialización JSON y los interceptores de autenticación.</td>
+                <td>Hooks de autenticación, llamadas al backend (no activo en Sprint 1, preparado para Sprint 2).</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">react-hook-form</span></td>
+                <td>7.72.1</td>
+                <td>Librería para el <strong>manejo de formularios</strong> con validación en tiempo real. Minimiza los re-renders y facilita la validación de campos. Se combina con Zod para un esquema de validación tipado.</td>
+                <td>Formulario de Login y Registro (páginas de autenticación).</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">@hookform/resolvers</span></td>
+                <td>5.2.2</td>
+                <td><strong>Adaptador</strong> que conecta react-hook-form con librerías de validación como Zod. Permite usar el esquema Zod directamente como validador del formulario.</td>
+                <td>Formularios de Login y Registro, junto con Zod.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">zod</span></td>
+                <td>4.3.6</td>
+                <td>Librería de <strong>validación y parsing de datos</strong> con TypeScript-first. Define esquemas (qué campos son requeridos, formato del email, longitud mínima de contraseña) de forma declarativa y tipada.</td>
+                <td>Esquemas de validación para los formularios de autenticación.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">sileo</span></td>
+                <td>0.1.5</td>
+                <td>Sistema de <strong>notificaciones (toasts)</strong> premium. Muestra mensajes de éxito, error o información en la pantalla que desaparecen automáticamente.</td>
+                <td>Notificaciones de registro exitoso, alertas de validación o mensajes del sistema.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">tailwindcss</span></td>
+                <td>4.2.2</td>
+                <td>Framework CSS de utilities. En este proyecto se mantiene como dependencia pero se utiliza de forma <strong>mínima</strong> (sin <code>@apply</code>). Solo se usa para algunas clases de layout como <code>w-full</code>.</td>
+                <td>Clases de utilidad simples en algunos componentes.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="subsection">DevDependencies (Solo Desarrollo)</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Paquete</th>
+                <th>Versión</th>
+                <th>¿Para qué sirve?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-dev">vite</span></td>
+                <td>8.0.4</td>
+                <td>Bundler y servidor de desarrollo. Procesa los archivos JSX/CSS y los sirve al navegador con HMR ultra-rápido durante el desarrollo.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dev">@vitejs/plugin-react</span></td>
+                <td>6.0.1</td>
+                <td>Plugin oficial de Vite para soportar React. Activa el procesamiento de JSX, Fast Refresh y optimizaciones específicas de React.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dev">eslint</span></td>
+                <td>9.39.4</td>
+                <td>Linter que analiza el código y reporta errores de sintaxis, variables no usadas, imports incorrectos y malas prácticas. Mantiene la calidad del código uniforme.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dev">eslint-plugin-react-hooks</span></td>
+                <td>7.0.1</td>
+                <td>Plugin de ESLint que valida las reglas de uso de Hooks de React (por ejemplo: no llamar hooks dentro de condicionales o loops).</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dev">eslint-plugin-react-refresh</span></td>
+                <td>0.5.2</td>
+                <td>Plugin de ESLint para compatibilidad con React Fast Refresh de Vite. Detecta componentes que no son compatibles con HMR.</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- ===== SECCIÓN 4: ARQUITECTURA ===== -->
+    <h2 class="section-title">4. Arquitectura del Proyecto</h2>
+    <p class="section-intro">
+        El proyecto sigue una arquitectura de <strong>Feature-Based Component Architecture</strong>, donde los archivos se organizan por su función y responsabilidad, no por su tipo.
+    </p>
+
+    <div class="arch-diagram">
+        <div class="arch-label">Estructura de Carpetas — src/</div>
+        <div class="arch-level">
+            <div class="arch-node primary">📄 index.css<br><small>Variables globales</small></div>
+            <div class="arch-node primary">📄 main.jsx<br><small>Entry point</small></div>
+            <div class="arch-node primary">📄 App.jsx<br><small>Router global</small></div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-level">
+            <div class="arch-node">📁 pages/<br><small>LandingPage, LoginPage, etc.</small></div>
+            <div class="arch-node">📁 layouts/<br><small>Footer (reutilizable)</small></div>
+            <div class="arch-node">📁 components/<br><small>sections/ + ui/</small></div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-level">
+            <div class="arch-node green">📁 styles/<br><small>Un .css por componente</small></div>
+            <div class="arch-node green">📁 hooks/<br><small>useAuth, etc.</small></div>
+            <div class="arch-node green">📁 context/<br><small>AuthContext</small></div>
+        </div>
+    </div>
+
+    <h3 class="subsection">Flujo de datos en la Landing Page</h3>
+    <p>La Landing Page es principalmente <strong>presentacional</strong> (no hay estado global complejo). El único dato del contexto que se consume es <code>user</code> del <code>AuthContext</code> para mostrar el mensaje de bienvenida:</p>
+
+    <div class="code-block">
+<span class="comment">// En LandingPage.jsx — consume el contexto de autenticación</span>
+<span class="keyword">const</span> { user } = <span class="tag">useAuth</span>();
+
+<span class="comment">// Si el usuario está logueado, muestra su nombre</span>
+{user && &lt;<span class="tag">p</span>&gt;Bienvenido {user.name}&lt;/<span class="tag">p</span>&gt;}
+    </div>
+
+
+    <!-- ===== SECCIÓN 5: SISTEMA DE DISEÑO ===== -->
+    <h2 class="section-title">5. Sistema de Diseño — CSS-First</h2>
+    <p class="section-intro">
+        Una de las decisiones más importantes del Sprint 1 fue adoptar un enfoque <strong>CSS-First estricto</strong>: cada componente tiene su propio archivo de estilos, sin mezclar lógica con estilos y sin usar directivas de Tailwind (<code>@apply</code>).
+    </p>
+
+    <h3 class="subsection">Variables Globales (index.css)</h3>
+    <p>Todas las variables del sistema de diseño se definen en <code>:root</code> para ser accesibles desde cualquier archivo CSS:</p>
+
+    <div class="code-block">
+<span class="comment">/* Paleta de colores principal */</span>
+:root {
+  <span class="prop">--color-primary</span>: <span class="val">#1a56db</span>;        <span class="comment">/* Azul institucional */</span>
+  <span class="prop">--color-primary-hover</span>: <span class="val">#1e429f</span>;   <span class="comment">/* Azul más oscuro para hovers */</span>
+  <span class="prop">--color-accent</span>: <span class="val">#3b82f6</span>;         <span class="comment">/* Azul claro para acentos */</span>
+  <span class="prop">--color-secondary</span>: <span class="val">#e2e8f0</span>;     <span class="comment">/* Gris borde */</span>
+  <span class="prop">--background</span>: <span class="val">#ffffff</span>;           <span class="comment">/* Fondo principal blanco */</span>
+  
+  <span class="comment">/* Tipografías */</span>
+  <span class="prop">--font-heading</span>: <span class="val">'Outfit'</span>, sans-serif;     <span class="comment">/* Títulos y logos */</span>
+  <span class="prop">--font-sans</span>: <span class="val">'Plus Jakarta Sans'</span>, sans-serif; <span class="comment">/* Cuerpo de texto */</span>
+}
+
+<span class="comment">/* Smooth scroll global para todas las anclas */</span>
+html { <span class="prop">scroll-behavior</span>: <span class="val">smooth</span>; }
+
+<span class="comment">/* Offset para que el header fijo no tape secciones */</span>
+[id] { <span class="prop">scroll-margin-top</span>: <span class="val">6rem</span>; }
+    </div>
+
+    <h3 class="subsection">Convención de Nombres de Clases (BEM-like)</h3>
+    <p>Las clases CSS siguen un patrón legible: <code>[componente]-[elemento]-[modificador]</code></p>
+
+    <div class="code-block">
+<span class="comment">/* Ejemplos del HeaderLanding */</span>
+.header-wrapper { }          <span class="comment">/* El elemento raíz del componente */</span>
+.header-wrapper.scrolled { } <span class="comment">/* Modificador: estado con scroll */</span>
+.header-container { }        <span class="comment">/* Contenedor interno */</span>
+.header-logo-group { }       <span class="comment">/* Grupo del logo */</span>
+.header-logo-title { }       <span class="comment">/* Texto del logo */</span>
+.header-nav-link { }         <span class="comment">/* Link de navegación */</span>
+.header-mobile-menu { }      <span class="comment">/* Menú móvil */</span>
+    </div>
+
+    <h3 class="subsection">Técnicas Visuales Implementadas</h3>
+
+    <div class="principles-grid">
+        <div class="principle-item no-break">
+            <h4>🪟 Glassmorphism</h4>
+            <p>El header usa <code>backdrop-filter: blur()</code> para crear un efecto de cristal translúcido. El color de fondo tiene transparencia (<code>rgba</code>) para que se vea el contenido de atrás.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>🔲 CSS Grid Background</h4>
+            <p>La cuadrícula decorativa de FeaturesSection y HowItWorksSection se crea con <code>background-image</code> de dos <code>linear-gradient</code> ortogonales, sin imágenes externas.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>✨ Gradient Text</h4>
+            <p>El texto resaltado del Hero usa <code>background-clip: text</code> + <code>-webkit-text-fill-color: transparent</code> para crear texto con degradado sin SVG ni Canvas.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>📐 Position Absolute Center</h4>
+            <p>Los links de navegación del header se centran con <code>position: absolute</code> + <code>left: 50%</code> + <code>transform: translateX(-50%)</code> para un centrado perfecto independiente del contenido lateral.</p>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 6: COMPONENTES ===== -->
+    <h2 class="section-title">6. Componentes Desarrollados — Análisis Técnico</h2>
+
+    <h3 class="subsection">HeaderLanding — Profundidad Técnica</h3>
+    <p>El Header es el componente más complejo del Sprint 1 por la cantidad de estados y comportamientos que maneja:</p>
+
+    <div class="callout info no-break">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+            <h4>¿Por qué useEffect para detectar scroll?</h4>
+            <p>React no detecta eventos del navegador automáticamente. Necesitamos <code>useEffect</code> para registrar un <code>EventListener</code> en el objeto <code>window</code> cuando el componente se monta, y limpiarlo (cleanup) cuando se desmonta, evitando fugas de memoria.</p>
+        </div>
+    </div>
+
+    <div class="code-block">
+<span class="comment">// Patrón: Scroll detection con cleanup</span>
+<span class="keyword">useEffect</span>(() => {
+  <span class="keyword">const</span> handleScroll = () => {
+    setIsScrolled(window.scrollY > <span class="value">20</span>); <span class="comment">// 20px umbral</span>
+  };
+  
+  window.addEventListener(<span class="string">'scroll'</span>, handleScroll);     <span class="comment">// Registrar</span>
+  
+  <span class="keyword">return</span> () => window.removeEventListener(<span class="string">'scroll'</span>, handleScroll); <span class="comment">// Cleanup</span>
+}, []); <span class="comment">// [] = solo al montar el componente</span>
+    </div>
+
+    <div class="callout warning no-break">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+            <h4>¿Por qué el delay de 100ms en los links del menú mobile?</h4>
+            <p>Sin el delay, React cierra el menú (re-render) antes de que el navegador procese el click en el ancla (<code>#features</code>). El re-render cancela el evento del anchor. El delay de 100ms le da tiempo al navegador para iniciar el smooth scroll antes de que el componente se re-renderice.</p>
+        </div>
+    </div>
+
+    <div class="callout success no-break">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <h4>¿Por qué scroll-margin-top: 6rem en [id]?</h4>
+            <p>El header es <code>position: fixed</code>, lo que significa que "flota" sobre el contenido. Sin <code>scroll-margin-top</code>, cuando el browser hace scroll a <code>#features</code>, la sección empieza exactamente en el top de la pantalla, tapada por el header. Con <code>6rem</code> de margen, el scroll se detiene 6rem antes de que el elemento llegue al top, dejando espacio suficiente.</p>
+        </div>
+    </div>
+
+    <h3 class="subsection">Framer Motion — Patrones Usados</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Prop / API</th>
+                <th>¿Qué hace?</th>
+                <th>Usado en</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>initial</code></td>
+                <td>Estado inicial de la animación (invisible, desplazado)</td>
+                <td>Todos los <code>motion.*</code></td>
+            </tr>
+            <tr>
+                <td><code>animate</code></td>
+                <td>Estado final de la animación (visible, en posición)</td>
+                <td>Todos los <code>motion.*</code></td>
+            </tr>
+            <tr>
+                <td><code>whileInView</code></td>
+                <td>Se activa cuando el elemento entra en el viewport del usuario</td>
+                <td>FeaturesSection, HowItWorksSection</td>
+            </tr>
+            <tr>
+                <td><code>whileHover</code></td>
+                <td>Se activa al pasar el cursor encima del elemento</td>
+                <td>HeroSection (tarjetas de materias)</td>
+            </tr>
+            <tr>
+                <td><code>exit</code></td>
+                <td>Animación de salida cuando el componente sale del DOM</td>
+                <td>HeaderLanding (menú mobile)</td>
+            </tr>
+            <tr>
+                <td><code>variants</code></td>
+                <td>Sistema de animaciones nombradas que se propagan a los hijos</td>
+                <td>HeaderLanding (stagger del menú)</td>
+            </tr>
+            <tr>
+                <td><code>staggerChildren</code></td>
+                <td>Delay entre cada elemento hijo (efecto cascada)</td>
+                <td>Menú mobile del Header</td>
+            </tr>
+            <tr>
+                <td><code>AnimatePresence</code></td>
+                <td>Permite animar la SALIDA de componentes antes de removerlos del DOM</td>
+                <td>HeaderLanding (menú mobile)</td>
+            </tr>
+            <tr>
+                <td><code>viewport: once</code></td>
+                <td>La animación <code>whileInView</code> se ejecuta solo la primera vez</td>
+                <td>FeaturesSection, HowItWorksSection</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- ===== SECCIÓN 7: TIMELINE ===== -->
+    <h2 class="section-title">7. Línea de Tiempo del Sprint 1</h2>
+    <p class="section-intro">Cronología de las tareas completadas durante el Sprint 1, desde la configuración inicial hasta el pulido final.</p>
+
+    <div class="timeline">
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">1</div>
+            <div class="timeline-content">
+                <h4>Setup Inicial del Proyecto</h4>
+                <p>Creación del proyecto con Vite + React. Configuración de React Router DOM, ESLint, estructura de carpetas base, e importación de fuentes desde Google Fonts (Outfit y Plus Jakarta Sans). Definición de variables CSS globales en <code>index.css</code>.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">2</div>
+            <div class="timeline-content">
+                <h4>Sistema de Autenticación</h4>
+                <p>Implementación del <code>AuthContext</code>, hook <code>useAuth</code> y páginas de Login y Registro con react-hook-form + Zod. Integración con axios para las llamadas al backend.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">3</div>
+            <div class="timeline-content">
+                <h4>Hero Section + Header Básico</h4>
+                <p>Primera versión del Hero con layout de 2 columnas, animaciones de entrada con Framer Motion y el mockup visual de materias. Header inicial con logo y botones de acción.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">4</div>
+            <div class="timeline-content">
+                <h4>Features Section + How It Works</h4>
+                <p>Sección de características con grid oscuro y tarjetas animadas. Sección de "Cómo funciona" con layout de 2 columnas, pasos numerados y mockup del Dashboard. Configuración de anclas de navegación (<code>id="features"</code>, <code>id="how-it-works"</code>).</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">5</div>
+            <div class="timeline-content">
+                <h4>CTA Section + Footer</h4>
+                <p>Sección de conversión final con gradiente azul. Separación del Footer monolítico en dos componentes independientes: <code>CTASection</code> y <code>Footer</code>, cada uno con sus propios estilos CSS.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">6</div>
+            <div class="timeline-content">
+                <h4>Eliminación de Emojis + CSS-First Refactor</h4>
+                <p>Reemplazo de todos los emojis por íconos de Lucide React en todos los componentes. Migración de estilos inline y <code>@apply</code> de Tailwind a archivos <code>.css</code> dedicados. Implementación de clases semánticas por componente.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">7</div>
+            <div class="timeline-content">
+                <h4>Header Profesional + Responsive</h4>
+                <p>Rediseño completo del Header: scroll detection con glassmorphism, links de navegación centrados con position absolute, menú mobile premium con AnimatePresence y stagger animations, y logo con scroll-to-top.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">8</div>
+            <div class="timeline-content">
+                <h4>Fixes de Responsividad y Navegación Mobile</h4>
+                <p>Solución del problema de links en mobile (delay de 100ms), restauración del <code>scroll-margin-top</code>, rediseño del menú mobile como tarjeta flotante glass con fondo dark, animaciones escalonadas y centrado de contenido.</p>
+            </div>
+        </div>
+
+        <div class="timeline-item no-break">
+            <div class="timeline-dot">9</div>
+            <div class="timeline-content">
+                <h4>Documentación y Comentarios</h4>
+                <p>Agregado de comentarios JSDoc y comentarios inline explicativos en todos los componentes. Creación de este documento de documentación del Sprint 1.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 8: PRINCIPIOS ===== -->
+    <h2 class="section-title">8. Principios y Decisiones de Diseño</h2>
+    <p class="section-intro">
+        Cada decisión de arquitectura y diseño fue tomada con un objetivo claro. Acá se documenta el "¿por qué?" detrás de las elecciones más importantes.
+    </p>
+
+    <div class="principles-grid">
+        <div class="principle-item no-break">
+            <h4>🚫 Sin emojis en el código</h4>
+            <p>Los emojis dependen del sistema operativo para su renderizado y pueden verse diferente en Windows, Mac, Android e iOS. Los íconos SVG de Lucide son consistentes en todas las plataformas y totalmente estilizables con CSS.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>📁 Un archivo CSS por componente</h4>
+            <p>Facilita encontrar y modificar estilos sin afectar a otros componentes. Cada archivo CSS vive junto a su componente lógicamente. Evita el fenómeno "cascade hell" de CSS global.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>🧩 Principio de Responsabilidad Única</h4>
+            <p>Cada componente hace una cosa bien. Por eso CTASection y Footer son componentes separados aunque visualmente están juntos. Esto permite reutilizarlos individualmente en otras páginas.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>📱 Mobile-First Responsive</h4>
+            <p>Los estilos base están definidos para mobile. Las media queries (<code>min-width</code>) agregan estilos para pantallas más grandes. Esto garantiza que la versión móvil siempre esté pensada, no sea un "afterthought".</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>⚡ whileInView sobre animate</h4>
+            <p>Las animaciones de secciones internas usan <code>whileInView</code> (se activan al hacer scroll) en lugar de <code>animate</code> (se activan al cargar). Esto mejora la percepción de performance y el engagement del usuario.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>🔗 Anchor Links vs React Router</h4>
+            <p>Los links a secciones de la misma página usan <code>&lt;a href="#id"&gt;</code> (nativo del browser) en lugar de <code>&lt;Link to="#id"&gt;</code> de React Router. Esto asegura compatibilidad con el <code>scroll-behavior: smooth</code> del CSS global.</p>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 9: RESPONSIVIDAD ===== -->
+    <h2 class="section-title">9. Responsividad y Accesibilidad</h2>
+    <p class="section-intro">
+        La Landing Page está diseñada para funcionar correctamente en todos los tamaños de pantalla, desde móviles pequeños (320px) hasta monitores grandes (1920px+).
+    </p>
+
+    <h3 class="subsection">Breakpoints Utilizados</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Breakpoint</th>
+                <th>Ancho mínimo</th>
+                <th>Comportamiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Mobile</strong></td>
+                <td>&lt; 640px</td>
+                <td>Columna única, botones apilados, menú hamburguesa visible, tarjeta flotante oculta</td>
+            </tr>
+            <tr>
+                <td><strong>sm</strong></td>
+                <td>≥ 640px</td>
+                <td>Botones del Hero en fila horizontal, tarjeta flotante visible</td>
+            </tr>
+            <tr>
+                <td><strong>lg</strong></td>
+                <td>≥ 1024px</td>
+                <td>Grid de 2 columnas en Hero y HowItWorks, nav del header visible, botones desktop visibles</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="subsection">Accesibilidad</h3>
+
+    <div class="card-grid">
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon blue">🏷️</div>
+                <div><div class="card-name">HTML Semántico</div></div>
+            </div>
+            <p>Uso de <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code> y <code>&lt;footer&gt;</code> en lugar de <code>&lt;div&gt;</code> genéricos para mejorar la estructura para screen readers.</p>
+        </div>
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon green">🔤</div>
+                <div><div class="card-name">Jerarquía de Headings</div></div>
+            </div>
+            <p>El logo del header es un <code>&lt;h1&gt;</code> (elemento de marca principal). Los títulos de sección son <code>&lt;h2&gt;</code> o <code>&lt;h3&gt;</code>. No se salta niveles de heading.</p>
+        </div>
+        <div class="card no-break">
+            <div class="card-header">
+                <div class="card-icon purple">🎯</div>
+                <div><div class="card-name">aria-label</div></div>
+            </div>
+            <p>El botón hamburguesa del menú móvil tiene <code>aria-label="Toggle Menu"</code> para que los lectores de pantalla puedan describir su función (ya que solo muestra un ícono, sin texto visible).</p>
+        </div>
+    </div>
+
+
+    <!-- ===== SECCIÓN 10: PRÓXIMOS PASOS ===== -->
+    <h2 class="section-title">10. Próximos Pasos — Sprint 2</h2>
+    <p class="section-intro">
+        Con la Landing Page completa y la arquitectura CSS-First establecida, el Sprint 2 se enfocará en las páginas internas y la funcionalidad core de la plataforma.
+    </p>
+
+    <div class="component-list">
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">Dashboard Principal</span>
+                <span class="status-tag status-pending">⏳ Pendiente</span>
+            </div>
+            <ul>
+                <li>Vista principal del usuario autenticado</li>
+                <li>Listado de materias con estados (cursando, debe rendir, aprobada)</li>
+                <li>Sidebar de navegación responsiva</li>
+                <li>Cards de grupos sugeridos (matching)</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">Perfil Académico</span>
+                <span class="status-tag status-pending">⏳ Pendiente</span>
+            </div>
+            <ul>
+                <li>Formulario de configuración del perfil (carrera, año, materias)</li>
+                <li>Selección de intención (busco apoyo / puedo ayudar / ambos)</li>
+                <li>Validación con react-hook-form + Zod</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">Sistema de Matching</span>
+                <span class="status-tag status-pending">⏳ Pendiente</span>
+            </div>
+            <ul>
+                <li>Listado de estudiantes compatibles</li>
+                <li>Filtros por materia, disponibilidad y modalidad</li>
+                <li>Integración con el endpoint de matching del backend</li>
+            </ul>
+        </div>
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">Grupos de Estudio</span>
+                <span class="status-tag status-pending">⏳ Pendiente</span>
+            </div>
+            <ul>
+                <li>Creación y gestión de grupos</li>
+                <li>Chat integrado en tiempo real</li>
+                <li>Gestión de miembros y solicitudes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="callout success no-break">
+        <span class="callout-icon">🎯</span>
+        <div class="callout-body">
+            <h4>Continuidad Garantizada</h4>
+            <p>La arquitectura CSS-First y el sistema de variables globales establecidos en el Sprint 1 garantizan que todas las páginas del Sprint 2 tendrán el mismo sistema de diseño consistente y coherente, simplemente importando las variables de <code>index.css</code>.</p>
+        </div>
+    </div>
+
+</div>
+
+    <!-- ===== SECCIÓN 11: CONTEXT / HOOKS / SERVICES / UTILS ===== -->
+    <h2 class="section-title">11. Arquitectura Interna: Context, Hooks, Services y Utils</h2>
+    <p class="section-intro">
+        Estas cuatro carpetas forman el <strong>núcleo lógico de la aplicación</strong>. Mientras que los componentes se encargan de mostrar la UI, estas carpetas se encargan de <em>cómo funciona la app por dentro</em>: cómo se guarda el usuario logueado, cómo se habla con el servidor y cómo se validan los formularios. Entender estas carpetas es entender la arquitectura real del proyecto.
+    </p>
+
+    <div class="callout info no-break">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+            <h4>¿Por qué separar en carpetas distintas?</h4>
+            <p>Principio de Responsabilidad Única (SRP): cada carpeta tiene UNA sola responsabilidad. Si mañana cambia la forma de autenticar (de JWT a OAuth), solo se cambia <code>authService.js</code>, sin tocar los componentes ni la UI.</p>
+        </div>
+    </div>
+
+    <!-- DIAGRAMA DEL FLUJO COMPLETO -->
+    <h3 class="subsection">Diagrama: Cómo fluyen los datos en la app</h3>
+
+    <div class="arch-diagram">
+        <div class="arch-label">Flujo de Autenticación — De la UI al Backend y de vuelta</div>
+
+        <div class="arch-level">
+            <div class="arch-node" style="background:rgba(99,102,241,0.2);border-color:rgba(99,102,241,0.4);color:#a5b4fc;">
+                🖥️ LoginPage.jsx<br><small>Formulario de login</small>
+            </div>
+        </div>
+        <div class="arch-arrow">↓ Valida con Zod (validators.js en /utils/)</div>
+
+        <div class="arch-level">
+            <div class="arch-node" style="background:rgba(99,102,241,0.2);border-color:rgba(99,102,241,0.4);color:#a5b4fc;">
+                🔗 useAuth() (hooks/useAuth.js)<br><small>Accede a login() del contexto</small>
+            </div>
+        </div>
+        <div class="arch-arrow">↓ Llama a login(credentials)</div>
+
+        <div class="arch-level">
+            <div class="arch-node primary">
+                🌐 AuthProvider.jsx (context/)<br><small>Orquesta el estado global</small>
+            </div>
+        </div>
+        <div class="arch-arrow">↓ Llama a loginUser()</div>
+
+        <div class="arch-level">
+            <div class="arch-node green">
+                📡 authService.js (services/)<br><small>Hace la petición HTTP al backend</small>
+            </div>
+        </div>
+        <div class="arch-arrow">↓ Responde con { user, token }</div>
+
+        <div class="arch-level">
+            <div class="arch-node primary">
+                💾 AuthProvider guarda en useState + localStorage
+            </div>
+        </div>
+        <div class="arch-arrow">↓ Todos los componentes se re-renderizan</div>
+
+        <div class="arch-level">
+            <div class="arch-node" style="background:rgba(99,102,241,0.2);border-color:rgba(99,102,241,0.4);color:#a5b4fc;">
+                🏠 Dashboard.jsx<br><small>const { user } = useAuth() → muestra el nombre</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==== CONTEXT ==== -->
+    <h3 class="subsection">📁 /context/ — El Estado Global de la App</h3>
+    <p>La carpeta <code>/context/</code> implementa el patrón <strong>React Context API</strong>. Su función es crear un "estado compartido" que cualquier componente puede leer sin necesidad de recibir props.</p>
+
+    <div class="callout warning no-break">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+            <h4>El problema que resuelve: Prop Drilling</h4>
+            <p>Sin Context, para pasar el usuario logueado desde App.jsx hasta un botón dentro de un header dentro de un layout, habría que pasarlo como prop en CADA nivel intermedio. Con Context, cualquier componente lo lee directamente con <code>useAuth()</code>.</p>
+        </div>
+    </div>
+
+    <div class="component-list">
+
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">AuthContext.jsx</span>
+                <span class="component-item-type">context</span>
+            </div>
+            <p>Es el archivo más pequeño pero más importante. <strong>Crea el "canal" de datos</strong> usando <code>createContext()</code> de React.</p>
+            <ul>
+                <li>Solo tiene 3 líneas de código pero es la base de toda la autenticación</li>
+                <li><code>createContext()</code> devuelve un objeto con un <code>.Provider</code> para dar datos y una referencia para leerlos</li>
+                <li>Se exporta con nombre (<code>export const</code>) porque tanto AuthProvider como useAuth lo necesitan importar</li>
+                <li>El valor por defecto es <code>undefined</code> — si alguien usa <code>useAuth()</code> fuera del Provider, obtendrá un error claro</li>
+            </ul>
+        </div>
+
+        <div class="component-item no-break">
+            <div class="component-item-header">
+                <span class="component-item-name">AuthProvider.jsx</span>
+                <span class="component-item-type">context</span>
+            </div>
+            <p>Es el componente que <strong>envuelve toda la app</strong> y pone los datos disponibles. Contiene toda la lógica de autenticación del frontend.</p>
+            <ul>
+                <li><strong>Estado inicial inteligente</strong>: lee localStorage al montar por primera vez, así el usuario no pierde su sesión al recargar la página (F5)</li>
+                <li><strong>función <code>login()</code></strong>: llama a authService → guarda en useState → guarda en localStorage → retorna los datos</li>
+                <li><strong>función <code>register()</code></strong>: llama a authService → retorna la respuesta (no loguea automáticamente)</li>
+                <li><strong>función <code>logout()</code></strong>: limpia useState → borra localStorage → todos los componentes se actualizan</li>
+                <li>Expone todo a través del <code>value</code> del Provider: <code>{ user, login, register, logout, loading }</code></li>
+                <li><strong><code>loading</code></strong>: preparado para mostrar spinners mientras el backend responde</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="code-block">
+<span class="comment">// ¿Cómo se conecta todo? En main.jsx:</span>
+<span class="tag">createRoot</span>(document.getElementById(<span class="string">'root'</span>)).render(
+  &lt;<span class="tag">React.StrictMode</span>&gt;
+    &lt;<span class="tag">AuthProvider</span>&gt;          <span class="comment">// ← AuthProvider envuelve TODA la app</span>
+      &lt;<span class="tag">BrowserRouter</span>&gt;        <span class="comment">// ← El router va dentro del AuthProvider</span>
+        &lt;<span class="tag">App</span> /&gt;               <span class="comment">// ← Todos los componentes tienen acceso a useAuth()</span>
+      &lt;/<span class="tag">BrowserRouter</span>&gt;
+    &lt;/<span class="tag">AuthProvider</span>&gt;
+  &lt;/<span class="tag">React.StrictMode</span>&gt;
+)
+    </div>
+
+    <!-- ==== HOOKS ==== -->
+    <h3 class="subsection">📁 /hooks/ — Lógica Reutilizable</h3>
+    <p>La carpeta <code>/hooks/</code> contiene funciones que empiezan con <code>use</code> y pueden usar otros hooks de React. Son el mecanismo para <strong>compartir lógica</strong> entre componentes sin duplicar código.</p>
+
+    <div class="component-item no-break">
+        <div class="component-item-header">
+            <span class="component-item-name">useAuth.js</span>
+            <span class="component-item-type">custom hook</span>
+        </div>
+        <p>Un hook de 4 líneas que <strong>encapsula el acceso al AuthContext</strong>. Es el puente entre el contexto y los componentes.</p>
+        <ul>
+            <li>Usa <code>useContext(AuthContext)</code> internamente para leer el contexto</li>
+            <li>Cualquier componente que lo llame recibe: <code>{ user, login, register, logout, loading }</code></li>
+            <li>Si el Provider actualiza sus datos (ej: usuario hace login), el componente que usa <code>useAuth()</code> se <strong>re-renderiza automáticamente</strong></li>
+            <li>Oculta el detalle de implementación: los componentes no necesitan saber que existe <code>useContext</code> ni <code>AuthContext</code></li>
+        </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment">// Uso en cualquier componente — así de simple:</span>
+
+<span class="keyword">function</span> <span class="tag">HeaderLanding</span>() {
+  <span class="keyword">const</span> { user, logout } = <span class="tag">useAuth</span>();  <span class="comment">// ← Una sola línea</span>
+
+  <span class="keyword">return</span> (
+    &lt;<span class="tag">header</span>&gt;
+      {user ? (
+        &lt;<span class="tag">button</span> onClick={logout}&gt;Cerrar sesión, {user.name}&lt;/<span class="tag">button</span>&gt;
+      ) : (
+        &lt;<span class="tag">Link</span> to=<span class="string">"/login"</span>&gt;Ingresar&lt;/<span class="tag">Link</span>&gt;
+      )}
+    &lt;/<span class="tag">header</span>&gt;
+  );
+}
+    </div>
+
+    <div class="principles-grid">
+        <div class="principle-item no-break">
+            <h4>🔁 ¿Qué pasa cuando el usuario hace login?</h4>
+            <p>1. LoginPage llama <code>login()</code> → 2. AuthProvider hace setUser(data) → 3. React detecta cambio de estado → 4. Todos los componentes que usen useAuth() se re-renderizan → 5. El header muestra "Hola Lauty" instantáneamente</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>💾 ¿Por qué localStorage?</h4>
+            <p>Sin localStorage, al recargar la página (F5), React reinicia su estado a null y el usuario queda deslogueado aunque haya iniciado sesión hace segundos. localStorage persiste los datos entre recargas del navegador.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>🔄 ¿Qué es async/await?</h4>
+            <p>Las funciones <code>login()</code> y <code>register()</code> son <code>async</code> porque deben ESPERAR la respuesta del backend (puede tardar 1-3 segundos). <code>await</code> pausa la ejecución hasta que la promesa del servicio se resuelve.</p>
+        </div>
+        <div class="principle-item no-break">
+            <h4>🧩 ¿Por qué useAuth y no useContext directamente?</h4>
+            <p>Si mañana cambia el contexto (renombrarlo, agregar un middleware), solo se cambia el hook. Los 20 componentes que usen useAuth() quedan intactos. Es el principio DRY: Don't Repeat Yourself.</p>
+        </div>
+    </div>
+
+    <!-- ==== SERVICES ==== -->
+    <h3 class="subsection">📁 /services/ — Comunicación con el Backend</h3>
+    <p>La carpeta <code>/services/</code> contiene las funciones que hacen <strong>peticiones HTTP al servidor</strong>. Es la capa de "acceso a datos" del frontend.</p>
+
+    <div class="component-item no-break">
+        <div class="component-item-header">
+            <span class="component-item-name">authService.js</span>
+            <span class="component-item-type">service</span>
+        </div>
+        <p>Actualmente es un <strong>mock (simulación)</strong> que usa <code>Promise + setTimeout</code> en lugar de llamadas HTTP reales. Esto permite desarrollar el frontend independientemente del backend.</p>
+        <ul>
+            <li><strong><code>loginUser(credentials)</code></strong>: simula POST /auth/login — responde con usuario + token JWT falso después de 1.5s</li>
+            <li><strong><code>registerUser(userData)</code></strong>: simula POST /auth/register — responde con mensaje de confirmación después de 1.5s</li>
+            <li>Las funciones son <code>async</code> y retornan <code>Promise</code>, exactamente igual a cómo funcionarán con axios</li>
+            <li>Cuando el backend esté listo: solo se reemplaza el cuerpo de las funciones con <code>axios.post()</code> — el resto del código no cambia</li>
+        </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment">// AHORA (mock con setTimeout):</span>
+<span class="keyword">export const</span> loginUser = <span class="keyword">async</span> (data) => {
+  <span class="keyword">return new</span> Promise((resolve) => {
+    setTimeout(() => resolve({ id: 1, token: <span class="string">"fake-jwt"</span> }), <span class="value">1500</span>);
+  });
+};
+
+<span class="comment">// DESPUÉS (con axios real — misma firma, diferente cuerpo):</span>
+<span class="keyword">export const</span> loginUser = <span class="keyword">async</span> (data) => {
+  <span class="keyword">const</span> response = <span class="keyword">await</span> axios.post(<span class="string">`${API_URL}/auth/login`</span>, data);
+  <span class="keyword">return</span> response.data; <span class="comment">// { user: {...}, token: "eyJhbG..." }</span>
+};
+    </div>
+
+    <div class="callout info no-break">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+            <h4>¿Qué es axios y por qué no usamos fetch nativo?</h4>
+            <p><code>fetch</code> es nativo del navegador pero requiere más código manual: parsear JSON, manejar errores HTTP (fetch no lanza error en 401/500), configurar headers en cada llamada. <code>axios</code> hace todo eso automáticamente y permite crear interceptores globales para agregar el token JWT a todas las peticiones.</p>
+        </div>
+    </div>
+
+    <div class="code-block">
+<span class="comment">// Ejemplo de interceptor axios (Sprint 2): agrega el token a TODAS las peticiones</span>
+axios.interceptors.request.use((config) => {
+  <span class="keyword">const</span> user = JSON.parse(localStorage.getItem(<span class="string">'user'</span>));
+  <span class="keyword">if</span> (user?.token) {
+    config.headers.Authorization = <span class="string">`Bearer ${user.token}`</span>;
+  }
+  <span class="keyword">return</span> config;
+});
+
+<span class="comment">// Ahora TODAS las llamadas de authService incluyen el token automáticamente</span>
+    </div>
+
+    <!-- ==== UTILS ==== -->
+    <h3 class="subsection">📁 /utils/ — Utilidades y Validaciones</h3>
+    <p>La carpeta <code>/utils/</code> contiene funciones y constantes de <strong>propósito general</strong> que no pertenecen a ningún componente específico.</p>
+
+    <div class="component-item no-break">
+        <div class="component-item-header">
+            <span class="component-item-name">validators.js</span>
+            <span class="component-item-type">util · zod</span>
+        </div>
+        <p>Define los <strong>schemas de validación</strong> usando la librería Zod. Un schema es la descripción de qué datos son válidos para cada formulario.</p>
+        <ul>
+            <li><strong><code>loginSchema</code></strong>: valida email (formato válido) + password (mínimo 6 caracteres)</li>
+            <li><strong><code>registerSchema</code></strong>: valida nombre (min 2 chars) + apellido (min 2 chars) + email + password</li>
+            <li>Se conecta a <code>react-hook-form</code> via <code>zodResolver</code> del paquete <code>@hookform/resolvers</code></li>
+            <li>Los errores se muestran automáticamente debajo de cada campo del formulario</li>
+            <li>La validación ocurre en el <strong>cliente</strong> (antes de enviar al servidor) — ahorra peticiones innecesarias</li>
+        </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment">// ¿Cómo se conecta validators.js con react-hook-form?</span>
+<span class="keyword">import</span> { useForm } from <span class="string">"react-hook-form"</span>;
+<span class="keyword">import</span> { zodResolver } from <span class="string">"@hookform/resolvers/zod"</span>;
+<span class="keyword">import</span> { loginSchema } from <span class="string">"../../utils/validators"</span>;
+
+<span class="keyword">function</span> <span class="tag">LoginPage</span>() {
+  <span class="keyword">const</span> { register, handleSubmit, formState: { errors } } = <span class="tag">useForm</span>({
+    resolver: <span class="tag">zodResolver</span>(loginSchema)  <span class="comment">// ← Conecta el schema</span>
+  });
+
+  <span class="keyword">const</span> onSubmit = (data) => {
+    <span class="comment">// Solo llega aquí si TODOS los campos pasaron la validación</span>
+    login(data);
+  };
+
+  <span class="keyword">return</span> (
+    &lt;<span class="tag">form</span> onSubmit={handleSubmit(onSubmit)}&gt;
+      &lt;<span class="tag">input</span> {...register(<span class="string">"email"</span>)} /&gt;
+      {errors.email && &lt;<span class="tag">p</span>&gt;{errors.email.message}&lt;/<span class="tag">p</span>&gt;} <span class="comment">// "Debe ser un email válido"</span>
+      
+      &lt;<span class="tag">input</span> type=<span class="string">"password"</span> {...register(<span class="string">"password"</span>)} /&gt;
+      {errors.password && &lt;<span class="tag">p</span>&gt;{errors.password.message}&lt;/<span class="tag">p</span>&gt;} <span class="comment">// "Mínimo 6 caracteres"</span>
+    &lt;/<span class="tag">form</span>&gt;
+  );
+}
+    </div>
+
+    <!-- TABLA RESUMEN -->
+    <h3 class="subsection">Tabla Resumen — Las 4 Carpetas</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Carpeta</th>
+                <th>Archivos</th>
+                <th>Responsabilidad</th>
+                <th>Tecnología clave</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>/context/</code></td>
+                <td>AuthContext.jsx<br>AuthProvider.jsx</td>
+                <td>Estado global del usuario autenticado. Disponible para toda la app sin pasar props.</td>
+                <td>React Context API, useState, localStorage</td>
+            </tr>
+            <tr>
+                <td><code>/hooks/</code></td>
+                <td>useAuth.js</td>
+                <td>Acceso simplificado al contexto. Encapsula <code>useContext(AuthContext)</code> en una sola función reutilizable.</td>
+                <td>React useContext, Custom Hook</td>
+            </tr>
+            <tr>
+                <td><code>/services/</code></td>
+                <td>authService.js</td>
+                <td>Comunicación con el backend (actualmente mock). Cuando el backend esté listo, se reemplaza el cuerpo de las funciones con axios.</td>
+                <td>axios (instalado), Promise, async/await</td>
+            </tr>
+            <tr>
+                <td><code>/utils/</code></td>
+                <td>validators.js</td>
+                <td>Schemas de validación de formularios. Define las reglas de cada campo (formato, longitud mínima, etc.).</td>
+                <td>Zod, @hookform/resolvers</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- DEPENDENCIAS ESPECÍFICAS -->
+    <h3 class="subsection">Dependencias que alimentan estas carpetas</h3>
+
+    <table class="tech-table">
+        <thead>
+            <tr>
+                <th>Paquete</th>
+                <th>Carpeta que lo usa</th>
+                <th>¿Para qué específicamente?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge-dep">react</span> (useContext, useState, useEffect, createContext)</td>
+                <td>/context/ y /hooks/</td>
+                <td><code>createContext()</code> crea el canal. <code>useState()</code> guarda el estado del usuario. <code>useContext()</code> lee el canal desde cualquier componente.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">axios</span></td>
+                <td>/services/</td>
+                <td>Cliente HTTP. Reemplazará las simulaciones de <code>authService.js</code> en el Sprint 2. Permite crear instancias con <code>baseURL</code> y interceptores para adjuntar el token JWT.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">zod</span></td>
+                <td>/utils/</td>
+                <td>Define los schemas de validación (<code>z.object({ email: z.email() })</code>). Valida los datos del formulario antes de enviarlos al servidor.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">react-hook-form</span></td>
+                <td>Páginas Login y Register</td>
+                <td>Maneja el estado del formulario (qué escribió el usuario), ejecuta las validaciones de Zod y expone los errores para mostrar bajo cada campo.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">@hookform/resolvers</span></td>
+                <td>Páginas Login y Register</td>
+                <td>Adaptador que conecta <code>react-hook-form</code> con <code>zod</code>. Sin él, los dos no se entienden entre sí. Se usa como <code>resolver: zodResolver(schema)</code>.</td>
+            </tr>
+            <tr>
+                <td><span class="badge-dep">sileo</span></td>
+                <td>Páginas Login y Register</td>
+                <td>Muestra notificaciones flotantes (ej: sileo.success) tras completar un registro correctamente sin bloquear la UI. Da un toque "premium" a las notificaciones.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout success no-break">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <h4>Estado actual: Todo conectado y listo para el Sprint 2</h4>
+            <p>El flujo completo ya funciona: el usuario puede registrarse y loguearse. La sesión persiste en localStorage. El Context distribuye el estado a toda la app. Solo resta conectar <code>authService.js</code> con el backend real usando <code>axios</code> cuando los endpoints estén disponibles.</p>
+        </div>
+    </div>
+
+
+<!-- FOOTER DEL DOCUMENTO -->
+<div class="doc-footer">
+    <div>
+        <div style="font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">StudyMatch UNSTA — Documentación Sprint 1</div>
+        <div>Universidad del Norte Santo Tomás de Aquino · Campus Yerba Buena</div>
+    </div>
+    <div style="text-align: right;">
+        <div style="margin-bottom: 0.25rem;">Proyecto Final · 2026</div>
+        <div>React 19 · Vite 8 · Framer Motion 12</div>
+    </div>
+</div>
+
+</body>
+</html>
