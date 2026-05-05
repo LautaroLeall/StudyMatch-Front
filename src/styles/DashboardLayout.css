@@ -1,0 +1,116 @@
+.dashboard-layout {
+    background: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+}
+
+.dashboard-layout ::selection {
+    background: var(--color-primary-transparent);
+}
+
+/* SIDEBAR */
+.dashboard-sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border-color, #E2E8F0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.02);
+    z-index: 20;
+}
+
+.dashboard-logo-icon {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border: 1px solid var(--color-secondary);
+    border-radius: 1rem;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-logo-icon svg {
+    color: var(--surface);
+}
+
+.dashboard-logo-title {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+    line-height: 1;
+}
+
+.dashboard-logo-subtitle {
+    font-family: var(--font-heading);
+    color: var(--color-secondary);
+    letter-spacing: 0.1em;
+}
+
+/* NAVIGATION */
+.dashboard-nav-item {
+    color: var(--text-muted);
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.dashboard-nav-item:hover {
+    background: var(--color-tertiary);
+    color: var(--text-primary);
+}
+
+.dashboard-nav-item svg {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.dashboard-nav-item.dashboard-nav-item--active {
+    background: var(--color-tertiary);
+    color: var(--color-secondary);
+    border-color: var(--color-primary-transparent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-nav-item.dashboard-nav-item--active svg {
+    color: var(--color-secondary);
+}
+
+/* LOGOUT BUTTON */
+.dashboard-logout-btn {
+    color: var(--text-muted);
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+}
+
+.dashboard-logout-btn:hover {
+    color: var(--danger);
+    background: #FEF2F2; /* red-50 equivalent */
+}
+
+/* HEADER */
+.dashboard-header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color, #E2E8F0);
+    z-index: 10;
+}
+
+.dashboard-header-title {
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+.dashboard-user-widget {
+    border-radius: 0.75rem;
+    transition: background 0.2s ease;
+}
+
+.dashboard-user-widget:hover {
+    background: var(--color-tertiary);
+}
+
+.dashboard-user-widget span {
+    color: var(--text-secondary);
+}
+
+.dashboard-avatar {
+    background: linear-gradient(135deg, var(--color-tertiary), var(--color-primary-transparent));
+    color: var(--color-secondary);
+    border-radius: 50%;
+    border: 1px solid var(--surface);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

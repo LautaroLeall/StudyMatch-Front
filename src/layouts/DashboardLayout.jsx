@@ -1,9 +1,15 @@
-import React from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Home, Users, MessageSquare, User, LogOut, BookOpen
+  Home,
+  Users,
+  MessageSquare,
+  User,
+  LogOut,
+  BookOpen
 } from 'lucide-react';
+import { PiHandWavingDuotone } from "react-icons/pi";
 import useAuth from '../hooks/useAuth';
+import '../styles/DashboardLayout.css';
 
 const DashboardLayout = () => {
   const { user, logout } = useAuth();
@@ -16,35 +22,55 @@ const DashboardLayout = () => {
   };
 
   const navItems = [
-    { id: 'inicio', path: '/dashboard/inicio', icon: Home, label: 'Inicio' },
-    { id: 'matching', path: '/dashboard/matching', icon: Users, label: 'Matching' },
-    { id: 'grupos', path: '/dashboard/grupos', icon: MessageSquare, label: 'Grupos' },
-    { id: 'perfil', path: '/dashboard/perfil', icon: User, label: 'Mi Perfil' },
+    {
+      id: 'inicio',
+      path: '/dashboard/inicio',
+      icon: Home,
+      label: 'Inicio'
+    },
+    {
+      id: 'matching',
+      path: '/dashboard/matching',
+      icon: Users,
+      label: 'Matching'
+    },
+    {
+      id: 'grupos',
+      path: '/dashboard/grupos',
+      icon: MessageSquare,
+      label: 'Grupos'
+    },
+    {
+      id: 'perfil',
+      path: '/dashboard/perfil',
+      icon: User,
+      label: 'Mi Perfil'
+    },
   ];
 
-  // Helper function to determine the title based on the path
+  // CAMBIO DE TEXTO SEGÚN LA RUTA
   const getPageTitle = () => {
     if (location.pathname.includes('chat')) return 'Sala de Estudio';
     return 'Panel Principal';
   };
 
-  // User might not be fully loaded initially if checking session
+  // DATOS DEL USUARIO ACTUAL
   const userName = user?.name?.split(' ')[0] || 'Usuario';
   const initial = userName.charAt(0).toUpperCase();
 
   return (
-    <div className="flex h-screen bg-[#F1F5F9] font-sans text-gray-800 selection:bg-blue-200">
+    <div className="dashboard-layout flex h-screen">
 
       {/* SIDEBAR */}
-      <aside className="w-64 bg-white border-r border-gray-200 flex flex-col justify-between shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-20">
+      <aside className="dashboard-sidebar w-64 flex flex-col justify-between shrink-0">
         <div>
-          <div className="p-7 flex items-center gap-3">
-            <div className="bg-linear-to-br from-blue-700 to-blue-900 p-2.5 rounded-2xl shadow-inner border border-blue-600">
-              <BookOpen className="w-7 h-7 text-white" />
+          <div className="flex items-center gap-3 p-7">
+            <div className="dashboard-logo-icon flex items-center justify-center p-2.5">
+              <BookOpen className="w-7 h-7" />
             </div>
             <div>
-              <h1 className="font-black text-2xl text-gray-900 tracking-tight leading-none">StudyMatch</h1>
-              <span className="text-[11px] text-blue-600 font-black uppercase tracking-widest ml-0.5">UNSTA</span>
+              <h1 className="dashboard-logo-title text-2xl font-black">StudyMatch</h1>
+              <span className="dashboard-logo-subtitle text-[11px] font-black uppercase ml-0.5">UNSTA</span>
             </div>
           </div>
 
@@ -54,16 +80,13 @@ const DashboardLayout = () => {
                 key={item.id}
                 to={item.path}
                 className={({ isActive }) => `
-                  w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl font-bold transition-all duration-200
-                  ${isActive
-                    ? 'bg-blue-50 text-blue-700 shadow-sm border border-blue-100'
-                    : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
-                  }
+                  dashboard-nav-item w-full flex items-center gap-3.5 px-4 py-3.5 font-bold
+                  ${isActive ? 'dashboard-nav-item--active' : ''}
                 `}
               >
-                {({ isActive }) => (
+                {() => (
                   <>
-                    <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-gray-400'}`} />
+                    <item.icon className="w-5 h-5" />
                     {item.label}
                   </>
                 )}
@@ -72,10 +95,10 @@ const DashboardLayout = () => {
           </nav>
         </div>
 
-        <div className="p-5 border-t border-gray-100">
+        <div className="p-5">
           <button
             onClick={handleLogout}
-            className="flex items-center justify-center gap-2 text-gray-500 hover:text-red-600 hover:bg-red-50 w-full px-4 py-3.5 rounded-2xl font-bold transition"
+            className="dashboard-logout-btn flex items-center justify-center gap-2 w-full px-4 py-3.5 font-bold"
           >
             <LogOut className="w-5 h-5" /> Cerrar Sesión
           </button>
@@ -83,26 +106,28 @@ const DashboardLayout = () => {
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+      <main className="dashboard-main flex-1 flex flex-col min-w-0 relative overflow-hidden">
         {/* HEADER */}
-        <header className="h-20 bg-white/80 backdrop-blur-md border-b border-gray-200 flex items-center justify-between px-8 shrink-0 z-10 sticky top-0">
-          <div className="text-sm font-bold text-gray-400 uppercase tracking-widest">
+        <header className="dashboard-header h-20 flex items-center justify-between px-8 shrink-0 sticky top-0">
+          <div className="dashboard-header-title text-sm font-bold uppercase">
             {getPageTitle()}
           </div>
           <div
-            className="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-xl transition"
+            className="dashboard-user-widget flex items-center gap-4 p-2 cursor-pointer"
             onClick={() => navigate('/dashboard/perfil')}
           >
-            <span className="text-sm font-bold text-gray-700">Hola, {userName} 👋</span>
+            <span className="text-sm flex items-center gap-2 font-bold">
+              Hola, {userName} <PiHandWavingDuotone className="w-6 h-6" />
+            </span>
             {/* Simple Avatar */}
-            <div className="w-8 h-8 text-sm rounded-full bg-linear-to-br from-blue-100 to-blue-200 text-blue-800 flex items-center justify-center font-bold shrink-0 border border-white shadow-sm">
+            <div className="dashboard-avatar w-8 h-8 flex items-center justify-center text-sm font-bold shrink-0">
               {initial}
             </div>
           </div>
         </header>
 
         {/* OUTLET FOR PAGES */}
-        <div className="flex-1 overflow-y-auto relative scroll-smooth">
+        <div className="flex-1 relative overflow-y-auto scroll-smooth">
           <Outlet />
         </div>
       </main>
