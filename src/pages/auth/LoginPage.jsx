@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GraduationCap, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,11 +21,14 @@ function LoginPage() {
         formState: { errors },
     } = useForm({ resolver: zodResolver(loginSchema) });
 
+    const navigate = useNavigate();
+
     const onSubmit = async (data) => {
         setLoading(true);
         try {
             await login(data);
             sileo.success({ title: "Bienvenido nuevamente" });
+            navigate("/dashboard/inicio");
         } catch {
             sileo.error({ title: "Email o contraseña incorrectos" });
         } finally {

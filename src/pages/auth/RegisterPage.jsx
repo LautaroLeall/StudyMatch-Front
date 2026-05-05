@@ -13,19 +13,49 @@ import { carreras } from "../../data/carreras";
 import "../../styles/RegisterPage.css";
 
 const ESTADOS = [
-    { value: "", label: "— Estado —" },
-    { value: "no_cursada", label: "No cursada" },
-    { value: "cursando", label: "Cursando" },
-    { value: "debe_rendir", label: "Debe rendir" },
-    { value: "recursando", label: "Recursando" },
-    { value: "aprobada", label: "Aprobada" },
+    {
+        value: "",
+        label: "— Estado —"
+    },
+    {
+        value: "no_cursada",
+        label: "No cursada"
+    },
+    {
+        value: "cursando",
+        label: "Cursando"
+    },
+    {
+        value: "debe_rendir",
+        label: "Debe rendir"
+    },
+    {
+        value: "recursando",
+        label: "Recursando"
+    },
+    {
+        value: "aprobada",
+        label: "Aprobada"
+    },
 ];
 
 const NIVELES = [
-    { value: "", label: "— Nivel —" },
-    { value: "basico", label: "Básico" },
-    { value: "intermedio", label: "Intermedio" },
-    { value: "avanzado", label: "Avanzado" },
+    {
+        value: "",
+        label: "— Nivel —"
+    },
+    {
+        value: "basico",
+        label: "Básico"
+    },
+    {
+        value: "intermedio",
+        label: "Intermedio"
+    },
+    {
+        value: "avanzado",
+        label: "Avanzado"
+    },
 ];
 
 const nivelAplica = (estado) =>
@@ -40,21 +70,33 @@ const stepVariants = {
 const transition = { duration: 0.28, ease: [0.4, 0, 0.2, 1] };
 
 const STEPS = [
-    { num: 1, label: "Datos" },
-    { num: 2, label: "Carrera" },
-    { num: 3, label: "Materias" },
-    { num: 4, label: "Objetivo" },
+    {
+        num: 1,
+        label: "Datos"
+    },
+    {
+        num: 2,
+        label: "Carrera"
+    },
+    {
+        num: 3,
+        label: "Materias"
+    },
+    {
+        num: 4,
+        label: "Objetivo"
+    },
 ];
 
 function ProgressBar({ current }) {
     return (
-        <nav className="reg-progress" aria-label="Progreso del registro">
+        <nav className="reg-progress flex items-center justify-center mb-8" aria-label="Progreso del registro">
             {STEPS.map((step, idx) => {
                 const done = current > step.num;
                 const active = current === step.num;
                 return (
-                    <div key={step.num} style={{ display: "flex", alignItems: "center" }}>
-                        <div className="reg-step-item">
+                    <div className="flex items-center" key={step.num}>
+                        <div className="reg-step-item flex flex-col items-center gap-2">
                             <div className={`reg-step-dot ${done ? "done" : active ? "active" : ""}`}>
                                 {done ? <Check size={14} /> : step.num}
                             </div>
@@ -456,17 +498,21 @@ function RegisterPage() {
     const isStepWide = step === 3;
 
     return (
-        <div className="reg-layout">
-            <div className={`reg-container ${isStepWide ? "step-wide" : ""}`}>
+        <div className="reg-layout relative flex items-start justify-center pt-12 pb-4 px-4">
+            <div className={`reg-container relative ${isStepWide ? "step-wide" : ""}`}>
 
                 {/* Logo */}
-                <Link to="/" className="reg-logo">
-                    <div className="reg-logo-icon">
+                <Link to="/" className="reg-logo flex items-center justify-center gap-3 mb-9">
+                    <div className="reg-logo-icon flex items-center justify-center">
                         <GraduationCap size={20} />
                     </div>
-                    <div className="reg-logo-text">
-                        <h1 className="reg-logo-title">StudyMatch</h1>
-                        <span className="reg-logo-subtitle">UNSTA</span>
+                    <div className="reg-logo-text flex flex-col">
+                        <h1 className="reg-logo-title m-0">
+                            StudyMatch
+                        </h1>
+                        <span className="reg-logo-subtitle">
+                            UNSTA
+                        </span>
                     </div>
                 </Link>
 
