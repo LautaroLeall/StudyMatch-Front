@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, ChevronRight, Clock, Users, Info, MessageCircle, Search } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
@@ -32,11 +32,10 @@ const SubjectName = ({ subjectId }) => {
 
 const DashboardInicio = () => {
   const navigate = useNavigate();
-  // We use useAuth() to get the real logged in user, but for now the user shape from context 
-  // might lack `materias` and `gruposUnidos`. We will mock it temporarily or assume it's there.
+  // Obtenemos el usuario actual autenticado
   const { user } = useAuth();
 
-  // Temporary: we merge the auth user with the MOCK user shape so it doesn't crash
+  // Temporal: fusionamos el usuario autenticado con la forma de usuario MOCK para que no falle
   const currentUser = {
     id: user?.id || 'u_me',
     name: user?.name || 'Lautaro Work',
@@ -45,11 +44,31 @@ const DashboardInicio = () => {
     añoActual: 4,
     intencion: 'ambas',
     materias: [
-      { id: 'm1', estado: 'aprobada', nivel: 'avanzado' },
-      { id: 'm2', estado: 'aprobada', nivel: 'intermedio' },
-      { id: 'm4', estado: 'aprobada', nivel: 'intermedio' },
-      { id: 'm7', estado: 'cursando', nivel: 'basico' },
-      { id: 'm10', estado: 'cursando', nivel: 'basico' }
+      {
+        id: 'm1',
+        estado: 'aprobada',
+        nivel: 'avanzado'
+      },
+      {
+        id: 'm2',
+        estado: 'aprobada',
+        nivel: 'intermedio'
+      },
+      {
+        id: 'm4',
+        estado: 'aprobada',
+        nivel: 'intermedio'
+      },
+      {
+        id: 'm7',
+        estado: 'cursando',
+        nivel: 'basico'
+      },
+      {
+        id: 'm10',
+        estado: 'cursando',
+        nivel: 'basico'
+      }
     ],
     gruposUnidos: ['g2', 'g1']
   };
@@ -69,8 +88,12 @@ const DashboardInicio = () => {
   return (
     <div className="inicio-container p-8 max-w-6xl mx-auto space-y-8 animate-in fade-in">
       <div>
-        <h1 className="inicio-title text-3xl font-bold">Resumen de tu actividad</h1>
-        <p className="inicio-subtitle mt-1">Acá tenés sugerencias inteligentes basadas en tu perfil académico actual.</p>
+        <h1 className="inicio-title text-3xl font-bold">
+          Resumen de tu actividad
+        </h1>
+        <p className="inicio-subtitle mt-1">
+          Acá tenés sugerencias inteligentes basadas en tu perfil académico actual.
+        </p>
       </div>
 
       <div className="inicio-grid grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -78,20 +101,24 @@ const DashboardInicio = () => {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h2 className="inicio-section-title text-xl font-bold flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-blue-600" /> Grupos Sugeridos
+              <BookOpen className="w-5 h-5 text-blue-600" />
+              Grupos Sugeridos
             </h2>
             <button
               onClick={() => navigate('/dashboard/grupos')}
               className="inicio-section-link text-sm font-medium flex items-center"
             >
-              Ver todos <ChevronRight className="w-4 h-4" />
+              Ver todos
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
 
           {suggestedGroups.length === 0 ? (
             <div className="inicio-empty p-8 text-center">
               <Info className="w-8 h-8 mx-auto mb-2" />
-              <p className="text-sm">No hay sugerencias nuevas por el momento.</p>
+              <p className="text-sm">
+                No hay sugerencias nuevas por el momento.
+              </p>
             </div>
           ) : (
             suggestedGroups.slice(0, 3).map(g => (
@@ -103,13 +130,23 @@ const DashboardInicio = () => {
                 <div>
                   <h3 className="inicio-card-title font-bold">{g.name}</h3>
                   <div className="inicio-card-info flex items-center gap-3 text-sm mt-1.5">
-                    <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> <SubjectName subjectId={g.subjectId} /></span>
-                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {g.schedule.split(' ')[0]}</span>
-                    <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" /> {g.members.length}</span>
+                    <span className="flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <SubjectName subjectId={g.subjectId} />
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
+                      {g.schedule.split(' ')[0]}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Users className="w-3.5 h-3.5" /> {g.members.length}
+                    </span>
                   </div>
                   <div className="mt-3 flex gap-2">
                     <Badge type={g.type}>{g.type}</Badge>
-                    <Badge type={g.modality === 'Virtual' ? 'default' : 'aprobada'}>{g.modality}</Badge>
+                    <Badge type={g.modality === 'Virtual' ? 'default' : 'aprobada'}>
+                      {g.modality}
+                    </Badge>
                   </div>
                 </div>
                 <div className="inicio-card-action p-2">
@@ -159,7 +196,9 @@ const DashboardInicio = () => {
       <div className="inicio-banner p-8 flex flex-col md:flex-row justify-between items-center relative overflow-hidden mt-8">
         <div className="inicio-banner-bg absolute -right-10 -top-10 w-40 h-40 pointer-events-none"></div>
         <div className="flex items-center gap-5 z-10">
-          <div className="inicio-banner-icon-wrap p-4"><Search className="w-8 h-8 text-white" /></div>
+          <div className="inicio-banner-icon-wrap p-4">
+            <Search className="w-8 h-8 text-white" />
+          </div>
           <div>
             <h3 className="text-2xl font-bold">¿Necesitás ayuda con una materia?</h3>
             <p className="mt-1 max-w-lg opacity-90">Nuestro algoritmo busca estudiantes avanzados dispuestos a dar tutorías en las materias que te cuestan.</p>
