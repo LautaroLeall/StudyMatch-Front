@@ -1,0 +1,176 @@
+.inicio-title {
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+}
+
+.inicio-subtitle {
+    color: var(--text-secondary);
+}
+
+.inicio-section-title {
+    color: var(--text-primary);
+}
+
+.inicio-section-link {
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+}
+
+.inicio-section-link:hover {
+    color: var(--color-secondary);
+}
+
+/* CARDS */
+.inicio-card,
+.inicio-user-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color, #f1f5f9);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.inicio-card:hover,
+.inicio-user-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-color: var(--color-primary-transparent);
+}
+
+.inicio-card-title {
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
+.inicio-card:hover .inicio-card-title {
+    color: var(--color-secondary);
+}
+
+.inicio-card-info {
+    color: var(--text-muted);
+}
+
+.inicio-card-action {
+    background: var(--color-tertiary);
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.inicio-card-action svg {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.inicio-card:hover .inicio-card-action {
+    background: var(--color-primary-transparent);
+}
+
+.inicio-card:hover .inicio-card-action svg {
+    color: var(--color-primary);
+}
+
+/* USER CARD */
+.inicio-user-name {
+    color: var(--text-primary);
+}
+
+.inicio-user-intent {
+    color: var(--text-muted);
+}
+
+.inicio-user-intent span {
+    color: var(--text-secondary);
+}
+
+.inicio-user-action {
+    background: var(--color-tertiary);
+    color: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.inicio-user-action:hover {
+    background: var(--color-primary);
+    color: var(--surface);
+}
+
+/* AVATAR */
+.inicio-avatar {
+    background: linear-gradient(135deg, var(--color-tertiary), var(--color-primary-transparent));
+    color: var(--color-secondary);
+    border-radius: 50%;
+    border: 1px solid var(--surface);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* BADGE */
+.inicio-badge {
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.inicio-badge--apoyo { background: #DBEAFE; color: #1D4ED8; }
+.inicio-badge--final { background: #FEE2E2; color: #B91C1C; }
+.inicio-badge--cursada { background: #FEF3C7; color: #92400E; }
+.inicio-badge--aprobada { background: #DCFCE7; color: #15803D; }
+.inicio-badge--recursando { background: #FFEDD5; color: #C2410C; }
+.inicio-badge--debe_rendir { background: #FEF3C7; color: #B45309; }
+.inicio-badge--no_cursada { background: #E2E8F0; color: #334155; }
+.inicio-badge--default { background: #F1F5F9; color: #1E293B; }
+
+/* BANNER */
+.inicio-banner {
+    background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
+    border-radius: 1rem;
+    color: var(--surface);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.inicio-banner-bg {
+    background: var(--surface);
+    opacity: 0.1;
+    filter: blur(24px);
+    border-radius: 50%;
+}
+
+.inicio-banner-icon-wrap {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.inicio-banner-btn {
+    background: var(--surface);
+    color: var(--color-secondary);
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.inicio-banner-btn:hover {
+    background: var(--color-tertiary);
+    transform: scale(1.05);
+}
+
+/* EMPTY STATE */
+.inicio-empty {
+    background: var(--surface);
+    border: 1px solid var(--border-color, #E2E8F0);
+    border-radius: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.inicio-empty svg {
+    color: var(--border-color, #E2E8F0);
+}
+
+.inicio-empty p {
+    color: var(--text-muted);
+}
